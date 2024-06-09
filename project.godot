@@ -11,8 +11,10 @@ config_version=5
 [application]
 
 config/name="Simple Defender"
+config/version="development"
 run/main_scene="res://bootstrap/bootstrap.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [autoload]
@@ -21,9 +23,20 @@ Logger="*res://addons/gs_logger/logger.gd"
 LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg")
+
+[internationalization]
+
+locale/locale_filter_mode=0
 
 [rendering]
 
