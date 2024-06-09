@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsxludx7kwc8k"]
+
+[sub_resource type="GDScript" id="GDScript_ofohi"]
+script/source = "extends Node
+
+func _ready():
+	pass
+"
+
+[node name="Bootstrap" type="Node"]
+script = SubResource("GDScript_ofohi")
