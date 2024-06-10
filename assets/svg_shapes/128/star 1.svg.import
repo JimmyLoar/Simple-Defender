@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfqmx1rocnmx6"
-path="res://.godot/imported/star 1.svg-977d950581b5e7065f6b6024b5940b37.ctex"
+path="res://.godot/imported/star 1.svg-77c0f30153264f441f49e91531019844.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_128/star 1.svg"
-dest_files=["res://.godot/imported/star 1.svg-977d950581b5e7065f6b6024b5940b37.ctex"]
+source_file="res://assets/svg_shapes/128/star 1.svg"
+dest_files=["res://.godot/imported/star 1.svg-77c0f30153264f441f49e91531019844.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=128
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

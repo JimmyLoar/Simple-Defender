@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://mbwkt2a5u2ng"
-path="res://.godot/imported/octagon.svg-b2b6cf1dfa4cff6512be0ad152e32cf9.ctex"
+path="res://.godot/imported/octagon.svg-d2260301141308581075041f5203f100.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_128/octagon.svg"
-dest_files=["res://.godot/imported/octagon.svg-b2b6cf1dfa4cff6512be0ad152e32cf9.ctex"]
+source_file="res://assets/svg_shapes/128/octagon.svg"
+dest_files=["res://.godot/imported/octagon.svg-d2260301141308581075041f5203f100.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=128
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8od2ygb3h2fy"
-path="res://.godot/imported/cube.svg-4293102dfeb10fdb18c585a2cd3c69e0.ctex"
+path="res://.godot/imported/cube.svg-fd9ab569b94bd10247f88f7f499bfce0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_64/cube.svg"
-dest_files=["res://.godot/imported/cube.svg-4293102dfeb10fdb18c585a2cd3c69e0.ctex"]
+source_file="res://assets/svg_shapes/64/cube.svg"
+dest_files=["res://.godot/imported/cube.svg-fd9ab569b94bd10247f88f7f499bfce0.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=64
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

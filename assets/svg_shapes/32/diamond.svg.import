@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://by568t3mp33pm"
-path="res://.godot/imported/diamond.svg-9e4898161878162ba38c48e5226622e6.ctex"
+path="res://.godot/imported/diamond.svg-4ef4af724c231c57f3b3a3612d008120.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_32/diamond.svg"
-dest_files=["res://.godot/imported/diamond.svg-9e4898161878162ba38c48e5226622e6.ctex"]
+source_file="res://assets/svg_shapes/32/diamond.svg"
+dest_files=["res://.godot/imported/diamond.svg-4ef4af724c231c57f3b3a3612d008120.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=32
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

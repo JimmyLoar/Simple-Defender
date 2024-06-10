@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7q2idbvb85fi"
-path="res://.godot/imported/square.svg-7b3e9ce5c8362749a0074636a9981cff.ctex"
+path="res://.godot/imported/square.svg-33df6d76ec1859bb3f9644e1c881d0ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_32/square.svg"
-dest_files=["res://.godot/imported/square.svg-7b3e9ce5c8362749a0074636a9981cff.ctex"]
+source_file="res://assets/svg_shapes/32/square.svg"
+dest_files=["res://.godot/imported/square.svg-33df6d76ec1859bb3f9644e1c881d0ea.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=32
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

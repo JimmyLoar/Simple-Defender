@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dup13gujpf1vo"
-path="res://.godot/imported/cross-figure.svg-bc249047355e280ae02959baa792cb84.ctex"
+path="res://.godot/imported/cross-figure.svg-23cdb134a5f5376dac36a48f159410ed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_16/cross-figure.svg"
-dest_files=["res://.godot/imported/cross-figure.svg-bc249047355e280ae02959baa792cb84.ctex"]
+source_file="res://assets/svg_shapes/16/cross-figure.svg"
+dest_files=["res://.godot/imported/cross-figure.svg-23cdb134a5f5376dac36a48f159410ed.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=16
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

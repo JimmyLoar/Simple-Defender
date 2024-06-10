@@ -3,25 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://eqgm87pkxfgq"
-path="res://.godot/imported/nonagon.svg-7587b3d936ec5601f3a7d71323eb9300.ctex"
+path="res://.godot/imported/nonagon.svg-7774b8b2e6b3378d44055ce13ccbf362.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/svg_shapes_128/nonagon.svg"
-dest_files=["res://.godot/imported/nonagon.svg-7587b3d936ec5601f3a7d71323eb9300.ctex"]
+source_file="res://assets/svg_shapes/128/nonagon.svg"
+dest_files=["res://.godot/imported/nonagon.svg-7774b8b2e6b3378d44055ce13ccbf362.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=2
-compress/channel_pack=1
-mipmaps/generate=true
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,7 +31,7 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=128
-detect_3d/compress_to=2
+detect_3d/compress_to=0
 svg/scale=1.0
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false
