@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfxomskymqv1a"]
+[gd_scene load_steps=4 format=3 uid="uid://dfxomskymqv1a"]
 
 [ext_resource type="Script" path="res://game/scene_level/level.gd" id="1_mc6dh"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_17883"]
 
 [sub_resource type="TileSet" id="TileSet_fps4u"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_mc6dh")
+texture = SubResource("CanvasTexture_17883")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_fps4u")
