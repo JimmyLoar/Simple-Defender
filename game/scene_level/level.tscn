@@ -15,3 +15,5 @@ layer_0/tile_data = PackedInt32Array(131076, 5, 0, 131075, 6, 0, 131077, 5, 0, 1
 script = ExtResource("3_nn2nk")
 
 [node name="Builder" type="Node2D" parent="."]
+
+[node name="EnemyPaths" type="Node2D" parent="."]
