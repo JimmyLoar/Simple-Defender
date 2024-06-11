@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Logger="*res://addons/gs_logger/logger.gd"
+GodotLogger="*res://addons/logger/logger.gd"
 LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
@@ -33,7 +33,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/gs_logger/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/merovi.svgtexture2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/logger/plugin.cfg")
 
 [internationalization]
 
