@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://cn5lfimrep7dx"]
+[gd_scene load_steps=3 format=3 uid="uid://cn5lfimrep7dx"]
+
+[ext_resource type="Script" path="res://game/scene_defence/defence.gd" id="1_pro6k"]
+[ext_resource type="PackedScene" uid="uid://di415odfl7wxf" path="res://resources/levels/000_level.tscn" id="2_o52c3"]
 
 [node name="DefenceScene" type="Node2D"]
+script = ExtResource("1_pro6k")
+level_packed = ExtResource("2_o52c3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
