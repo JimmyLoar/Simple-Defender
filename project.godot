@@ -35,9 +35,23 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/logger/plugin.cfg")
 
+[game]
+
+level/cell/size=128
+
 [internationalization]
 
 locale/locale_filter_mode=0
+
+[layer_names]
+
+2d_render/layer_1="Default"
+2d_physics/layer_1="Default"
+2d_physics/layer_2="Tower"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Projectile"
+2d_physics/layer_5="EnemyProjectile"
+2d_physics/layer_6="Base"
 
 [rendering]
 
