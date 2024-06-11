@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dehfahbimm0v1"]
+
+[ext_resource type="Script" path="res://game/scene_tower/tower.gd" id="1_ybaeh"]
+[ext_resource type="Script" path="res://game/scene_tower/body.gd" id="3_dtqsf"]
+[ext_resource type="Texture2D" uid="uid://dpvneg5twhe7b" path="res://assets/svg_shapes/128/pentagon.svg" id="4_nv8iy"]
+[ext_resource type="Script" path="res://game/scene_tower/companent/radar.gd" id="4_x5ixg"]
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_ybaeh")
+size = 2
+
+[node name="TowerRadar" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("4_x5ixg")
+vition_range = 4.4
+
+[node name="BodyCompanent" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("3_dtqsf")
+
+[node name="Textures" type="CanvasGroup" parent="."]
+
+[node name="MainSprite" type="Sprite2D" parent="Textures"]
+texture = ExtResource("4_nv8iy")
+offset = Vector2(0, -8)
