@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgtux4doiinbe"]
+
+[ext_resource type="Script" path="res://game/scene_enemy/enemy.gd" id="1_5k3eo"]
+[ext_resource type="Texture2D" uid="uid://rvdyjrkkgour" path="res://assets/svg_shapes/64/circle.svg" id="1_ka2fc"]
+[ext_resource type="Texture2D" uid="uid://bdr3k1ybavaek" path="res://assets/svg_shapes/16/decagon.svg" id="2_84ayh"]
+[ext_resource type="Texture2D" uid="uid://dahdlbnu57f4s" path="res://assets/svg_shapes/16/triangle.svg" id="3_rfvqd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ejty4"]
+radius = 26.0
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_5k3eo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.969408, 0, 0.281785, 1)
+texture = ExtResource("1_ka2fc")
+
+[node name="Decagon" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-9, -4)
+texture = ExtResource("2_84ayh")
+
+[node name="Decagon2" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(8, -4)
+texture = ExtResource("2_84ayh")
+
+[node name="Triangle" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(1.13687e-13, 15)
+rotation = 3.14159
+scale = Vector2(1.5, 0.4)
+texture = ExtResource("3_rfvqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ejty4")
+disabled = true

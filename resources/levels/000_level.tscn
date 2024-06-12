@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://di415odfl7wxf"]
+[gd_scene load_steps=5 format=3 uid="uid://di415odfl7wxf"]
 
 [ext_resource type="PackedScene" uid="uid://dfxomskymqv1a" path="res://game/scene_level/level.tscn" id="1_swlr5"]
 [ext_resource type="TileSet" uid="uid://ccplgoiowr66b" path="res://game/scene_level/tileset/128.tres" id="2_2geie"]
 [ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="3_2rec7"]
+[ext_resource type="PackedScene" uid="uid://dgtux4doiinbe" path="res://game/scene_enemy/enemy.tscn" id="4_jfyt3"]
 
 [node name="LevelScene" instance=ExtResource("1_swlr5")]
 
@@ -16,3 +17,6 @@ base_positions = Array[Vector2i]([Vector2i(55, 19), Vector2i(35, 8)])
 
 [node name="AttakerTower" parent="Builder" index="0" instance=ExtResource("3_2rec7")]
 position = Vector2(832, 192)
+
+[node name="Enemy" parent="EnemyPaths" index="0" instance=ExtResource("4_jfyt3")]
+position = Vector2(832, 320)
