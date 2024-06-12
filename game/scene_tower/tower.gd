@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name TowerBase
 extends Node2D
 
@@ -10,7 +10,7 @@ extends Node2D
 @onready var body = $BodyCompanent
 
 
-var _logger: Log
+var _logger: Log : get = _get_logger
 
 
 func set_size(value: int):
