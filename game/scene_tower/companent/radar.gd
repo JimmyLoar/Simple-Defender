@@ -2,6 +2,8 @@
 class_name TowerRadarCompanent
 extends Area2D
 
+signal targets_changed
+
 @export_enum("None:-1", "Enemies:0", "Allies:1") var target_mode := 0: set = set_target_mode
 @export_range(2.0, 64.0, 0.01) var vition_range := 1.0: set = set_vition_range
 
@@ -9,6 +11,7 @@ var collision : CollisionShape2D
 
 var _logger : Log
 
+var _queue_targets: Array[Node2D] = []
 
 
 func set_target_mode(value: int = -1):
@@ -47,5 +50,24 @@ func _get_logger():
 	if _logger: return _logger
 	var parent = get_parent() as TowerBase
 	_logger = GodotLogger.with("%s.Radar" % [parent.tower_name if parent else "Nill"])
-	
 	return _logger
+
+
+func _on_target_entered(new_target: Node2D):
+	if _queue_targets.has(new_target): return
+	_queue_targets.append(new_target)
+	targets_changed.emit()
+
+
+func _on_target_exited(old_target: Node2D):
+	if not _queue_targets.has(old_target): return
+	_queue_targets.erase(old_target)
+	targets_changed.emit()
+
+
+func sort_targets():
+	pass
+
+
+func get_target(count := 1) -> Array[Node2D]:
+	return []
