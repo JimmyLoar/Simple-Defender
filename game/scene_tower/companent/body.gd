@@ -1,5 +1,5 @@
 @tool
-class_name TowerBody
+class_name TowerBodyCompanent
 extends StaticBody2D
 
 var collition : CollisionShape2D

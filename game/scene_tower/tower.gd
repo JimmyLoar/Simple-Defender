@@ -38,5 +38,5 @@ func _draw_place():
 
 func _get_logger():
 	if _logger: return _logger
-	_logger = GodotLogger.with("%s,Scene" % [tower_name]) 
+	_logger = GodotLogger.with("%s.Scene" % [tower_name])
 	return _logger

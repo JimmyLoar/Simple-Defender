@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://f13h4hllkm1l"]
+
+[ext_resource type="PackedScene" uid="uid://dehfahbimm0v1" path="res://game/scene_tower/tower.tscn" id="1_753gj"]
+[ext_resource type="Script" path="res://game/scene_tower/attaker_tower.gd" id="2_4bkew"]
+[ext_resource type="PackedScene" uid="uid://c1ghch3rbl7il" path="res://game/scene_tower/weapon.tscn" id="3_jjs4r"]
+
+[node name="AttakerTower" instance=ExtResource("1_753gj")]
+script = ExtResource("2_4bkew")
+tower_name = "AttackerTower"
+size = 1
+
+[node name="Weapon" parent="." index="3" instance=ExtResource("3_jjs4r")]

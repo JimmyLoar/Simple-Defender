@@ -1,5 +1,5 @@
 @tool
-class_name TowerRadar
+class_name TowerRadarCompanent
 extends Area2D
 
 @export_enum("None:-1", "Enemies:0", "Allies:1") var target_mode := 0: set = set_target_mode
