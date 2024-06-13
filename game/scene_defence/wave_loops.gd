@@ -4,13 +4,21 @@ signal wave_started(wave: int)
 signal wave_finished(wave: int)
 
 
-var currect_wave: int = 0
+var _wave: int = 0
+var _logger := GodotLogger.with("WaveLoops")
 
 
-func start_wave(wave := currect_wave):
-	currect_wave = wave + 1 
-	emit_signal("wave_started", currect_wave)
+func start_wave(wave := _wave):
+	if wave != wave: _logger.debug("set wave value on %d" % wave)
+	_wave = wave + 1 
+	_logger.info("started new wave #%d" % _wave)
+	emit_signal("wave_started", _wave)
 
 
 func finish_wave():
-	emit_signal("wave_finished", currect_wave)
+	_logger.info("finished new wave #%d" % _wave)
+	emit_signal("wave_finished", _wave)
+
+
+func get_currect_wave():
+	return _wave
