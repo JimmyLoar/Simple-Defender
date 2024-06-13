@@ -1,11 +1,10 @@
+class_name Enemy
 extends Area2D
 
+signal dead(enemy: Enemy)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export var move_speed := 64
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func death():
+	emit_signal("dead", self)
