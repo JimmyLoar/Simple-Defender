@@ -24,5 +24,3 @@ script = ExtResource("4_bh3p7")
 
 [node name="EnemiesPath" type="Path2D" parent="EnemiesKeeper"]
 script = ExtResource("5_322nf")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="EnemiesKeeper/EnemiesPath"]

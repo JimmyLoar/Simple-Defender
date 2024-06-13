@@ -11,5 +11,10 @@ func _ready():
 		add_child(level)
 		move_child(level, 0)
 	
+	if not level: return
+	var enemy_keeper := level.get_enemy_keeper() as EnemiesKeeper
+	waves.wave_started.connect(enemy_keeper.generate_wave)
+	waves.call_deferred("start_wave")
+	
 
 

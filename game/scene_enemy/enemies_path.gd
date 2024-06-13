@@ -18,14 +18,6 @@ func _init():
 	_timer.timeout.connect(_do_spawn_request)
 
 
-func _ready():
-	spawn()
-	spawn()
-	spawn()
-	spawn()
-	spawn()
-
-
 func spawn(enemy_name: StringName = '',):
 	if _timer.is_stopped():
 		var enemy := _create_enemy()
@@ -36,6 +28,10 @@ func spawn(enemy_name: StringName = '',):
 		return
 	
 	_queue_request.append(enemy_name)
+
+
+func spawn_any(count: int):
+	for _i in count: spawn()
 
 
 func _do_spawn_request():
