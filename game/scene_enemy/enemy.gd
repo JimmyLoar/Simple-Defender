@@ -2,6 +2,7 @@ class_name Enemy
 extends Area2D
 
 signal dead(enemy: Enemy)
+signal finished(enemy: Enemy)
 
 @export var move_speed := 64
 

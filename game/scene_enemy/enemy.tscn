@@ -1,33 +1,112 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgtux4doiinbe"]
+[gd_scene load_steps=12 format=3 uid="uid://dgtux4doiinbe"]
 
 [ext_resource type="Script" path="res://game/scene_enemy/enemy.gd" id="1_5k3eo"]
-[ext_resource type="Texture2D" uid="uid://rvdyjrkkgour" path="res://assets/svg_shapes/64/circle.svg" id="1_ka2fc"]
-[ext_resource type="Texture2D" uid="uid://bdr3k1ybavaek" path="res://assets/svg_shapes/16/decagon.svg" id="2_84ayh"]
-[ext_resource type="Texture2D" uid="uid://dahdlbnu57f4s" path="res://assets/svg_shapes/16/triangle.svg" id="3_rfvqd"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/shape_texture_2d.gd" id="2_ofe3m"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/drawable_ellipse.gd" id="3_3e80y"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/drawable_polygon.gd" id="4_csat4"]
+
+[sub_resource type="Resource" id="Resource_ctp4i"]
+script = ExtResource("3_3e80y")
+
+[sub_resource type="Texture2D" id="Texture2D_p8mqs"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_ofe3m")
+size = Vector2i(64, 64)
+shape = SubResource("Resource_ctp4i")
+fill_type = 0
+fill_color = Color(0.968627, 0, 0.282353, 1)
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+fill_repeat = "pad"
+stroke_type = 0
+stroke_width = 0.0
+stroke_color = Color(0, 0, 0, 1)
+stroke_from = Vector2(0, 0)
+stroke_to = Vector2(1, 0)
+stroke_repeat = "pad"
+stroke_joint = "round"
+offset = Vector2(0, 0)
+rotation = 0.0
+scale = Vector2(1, 1)
+
+[sub_resource type="Resource" id="Resource_60wqk"]
+script = ExtResource("3_3e80y")
+
+[sub_resource type="Texture2D" id="Texture2D_ukifh"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_ofe3m")
+size = Vector2i(14, 14)
+shape = SubResource("Resource_60wqk")
+fill_type = 0
+fill_color = Color(1, 1, 1, 1)
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+fill_repeat = "pad"
+stroke_type = 0
+stroke_width = 0.0
+stroke_color = Color(0, 0, 0, 1)
+stroke_from = Vector2(0, 0)
+stroke_to = Vector2(1, 0)
+stroke_repeat = "pad"
+stroke_joint = "round"
+offset = Vector2(0, 0)
+rotation = 0.0
+scale = Vector2(1, 1)
+
+[sub_resource type="Resource" id="Resource_xlb4b"]
+script = ExtResource("4_csat4")
+points = 3
+is_star = false
+star_inset = 0.5
+
+[sub_resource type="Texture2D" id="Texture2D_4i8gv"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_ofe3m")
+size = Vector2i(16, 16)
+shape = SubResource("Resource_xlb4b")
+fill_type = 0
+fill_color = Color(1, 1, 1, 1)
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+fill_repeat = "pad"
+stroke_type = 0
+stroke_width = 0.0
+stroke_color = Color(0, 0, 0, 1)
+stroke_from = Vector2(0, 0)
+stroke_to = Vector2(1, 0)
+stroke_repeat = "pad"
+stroke_joint = "round"
+offset = Vector2(0, 0)
+rotation = -180.0
+scale = Vector2(1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ejty4"]
 radius = 26.0
 
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_5k3eo")
+move_speed = 512
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.969408, 0, 0.281785, 1)
-texture = ExtResource("1_ka2fc")
+texture_filter = 1
+texture = SubResource("Texture2D_p8mqs")
 
 [node name="Decagon" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(1, 1, 0, 1)
 position = Vector2(-9, -4)
-texture = ExtResource("2_84ayh")
+texture = SubResource("Texture2D_ukifh")
 
 [node name="Decagon2" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(1, 1, 0, 1)
 position = Vector2(8, -4)
-texture = ExtResource("2_84ayh")
+texture = SubResource("Texture2D_ukifh")
 
-[node name="Triangle" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(1.13687e-13, 15)
-rotation = 3.14159
-scale = Vector2(1.5, 0.4)
-texture = ExtResource("3_rfvqd")
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0, 13)
+texture = SubResource("Texture2D_4i8gv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ejty4")
