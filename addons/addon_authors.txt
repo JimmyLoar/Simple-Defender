@@ -1,0 +1,9 @@
+##Addon - Author##
+
+controller_icons - rsubtil
+
+Godot4LocalizationEditor - VP-GAMES
+
+GodotLogger - DawnGroveStudios
+
+ShapeTexture2D - aXu-AP
