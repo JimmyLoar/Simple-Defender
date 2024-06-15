@@ -18,7 +18,7 @@ portal_positions = Array[Vector2i]([Vector2i(3, 6)])
 base_positions = Array[Vector2i]([Vector2i(21, 12)])
 
 [node name="AttakerTower" parent="Builder" index="0" instance=ExtResource("3_2rec7")]
-position = Vector2(640, 448)
+position = Vector2(672, 480)
 
 [node name="EnemiesPath" parent="EnemiesKeeper" index="0"]
 curve = SubResource("Curve2D_3ufwt")

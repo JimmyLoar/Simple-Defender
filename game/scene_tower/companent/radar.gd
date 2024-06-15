@@ -14,6 +14,16 @@ var _logger : Log
 var _queue_targets: Array[Node2D] = []
 
 
+func _init():
+	collision = CollisionShape2D.new()
+	collision.shape = CircleShape2D.new() 
+	set_vition_range(vition_range)
+	add_child(collision)
+	
+	area_entered.connect(_on_target_entered)
+	area_exited.connect(_on_target_exited)
+
+
 func set_target_mode(value: int = -1):
 	if not is_inside_tree():
 		call_deferred("set_target_mode", value)
@@ -39,13 +49,6 @@ func set_vition_range(value: float):
 	_get_logger().debug("set vision range on %0.2f tiles" % [vition_range])
 
 
-func _enter_tree():
-	collision = CollisionShape2D.new()
-	collision.shape = CircleShape2D.new() 
-	set_vition_range(vition_range)
-	add_child(collision)
-
-
 func _get_logger():
 	if _logger: return _logger
 	var parent = get_parent() as TowerBase
@@ -56,12 +59,14 @@ func _get_logger():
 func _on_target_entered(new_target: Node2D):
 	if _queue_targets.has(new_target): return
 	_queue_targets.append(new_target)
+	_logger.debug("found target %s" % new_target)
 	targets_changed.emit()
 
 
 func _on_target_exited(old_target: Node2D):
 	if not _queue_targets.has(old_target): return
 	_queue_targets.erase(old_target)
+	_logger.debug("lost target %s" % old_target)
 	targets_changed.emit()
 
 
@@ -69,5 +74,10 @@ func sort_targets():
 	pass
 
 
-func get_target(count := 1) -> Array[Node2D]:
+func get_targets(count := 1) -> Array[Node2D]:
 	return []
+
+
+func get_first_target_or_null():
+	if _queue_targets.is_empty(): return null
+	return _queue_targets.front()

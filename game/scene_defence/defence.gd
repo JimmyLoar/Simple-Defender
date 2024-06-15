@@ -4,7 +4,7 @@ extends Node2D
 @export var level_packed: PackedScene
 var level: Level
 var waves := WaveLoops.new()
-
+var _logger := GodotLogger.with("DefenceScene")
 
 
 func _ready():
@@ -16,7 +16,9 @@ func _ready():
 	if not level: return
 	var enemy_keeper := level.get_enemy_keeper() as EnemiesKeeper
 	waves.wave_started.connect(enemy_keeper.generate_wave)
-	waves.call_deferred("start_wave")
 	enemy_keeper.path_cleared.connect(waves.start_wave)
+	
+	#start game
+	waves.call_deferred("start_wave")
 
 

@@ -87,8 +87,11 @@ scale = Vector2(1, 1)
 radius = 16.0
 
 [node name="Enemy" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_5k3eo")
-move_speed = 1024
+move_speed = 192
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -109,5 +112,5 @@ position = Vector2(0, 7)
 texture = SubResource("Texture2D_4i8gv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_ejty4")
-disabled = true
