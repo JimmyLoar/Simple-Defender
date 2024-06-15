@@ -210,6 +210,7 @@ func _write_logs(message:String):
 		if not global_logger._file:
 			global_logger._load_file()
 		_file = global_logger._file
+		return
 	
 	_file.store_line(message)
 	_file.flush()
@@ -233,7 +234,7 @@ func _get_log_path():
 
 func _get_global_logger():
 	if not Engine.has_singleton("GodotLogger"): 
-		Engine.register_singleton("GodotLogger", Log.new())
+		Engine.register_singleton("GodotLogger", GodotLogger)
 	return Engine.get_singleton("GodotLogger")
 
 
