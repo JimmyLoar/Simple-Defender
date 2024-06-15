@@ -14,5 +14,7 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
-game.log
+
+# Log files ignores
+*.log
 *.tmp
