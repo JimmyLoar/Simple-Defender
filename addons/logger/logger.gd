@@ -85,8 +85,7 @@ func logger(message:String,values,log_level=LogLevel.INFO):
 		return
 	
 	emit_signal("log_message", log_level, msg)
-	_write_logs(msg)
-	#call_thread_safe("_write_logs", msg)
+	_write_logs(_remove_bbcode(msg))
 	_print_msg(log_level, msg)
 
 
@@ -214,6 +213,15 @@ func _write_logs(message:String):
 	
 	_file.store_line(message)
 	_file.flush()
+
+
+func _remove_bbcode(msg: String):
+	var left_index := msg.find("[", 27)
+	while left_index >= 0:
+		var right_index := msg.find("]", 27)
+		msg = msg.erase(left_index, right_index - left_index + 1)
+		left_index = msg.find("[", 27)
+	return msg
 
 
 func _get_log_path():
