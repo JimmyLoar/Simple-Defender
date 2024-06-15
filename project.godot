@@ -43,7 +43,7 @@ folder_colors={
 
 [game]
 
-level/cell/size=128
+level/cell/size=64
 
 [internationalization]
 

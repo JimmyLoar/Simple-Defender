@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://di415odfl7wxf"]
+[gd_scene load_steps=4 format=3 uid="uid://di415odfl7wxf"]
 
 [ext_resource type="PackedScene" uid="uid://dfxomskymqv1a" path="res://game/scene_level/level.tscn" id="1_swlr5"]
-[ext_resource type="TileSet" uid="uid://ccplgoiowr66b" path="res://game/scene_level/tileset/128.tres" id="2_2geie"]
 [ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="3_2rec7"]
 
 [sub_resource type="Curve2D" id="Curve2D_3ufwt"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 192, 192, 0, 0, 0, 0, 576, 192, 0, 0, 0, 0, 576, 448, 0, 0, 0, 0, 192, 448, 0, 0, 0, 0, 192, 704, 0, 0, 0, 0, 1088, 704, 0, 0, 0, 0, 1088, 320, 0, 0, 0, 0, 1600, 320, 0, 0, 0, 0, 1600, 960, 0, 0, 0, 0, 960, 960)
+"points": PackedVector2Array(0, 0, 0, 0, 224, 416, 0, 0, 0, 0, 224, 224, 0, 0, 0, 0, 480, 224, 0, 0, 0, 0, 480, 160, 0, 0, 0, 0, 608, 160, 0, 0, 0, 0, 608, 224, 0, 0, 0, 0, 736, 224, 0, 0, 0, 0, 736, 544, 0, 0, 0, 0, 416, 544, 0, 0, 0, 0, 416, 864, 0, 0, 0, 0, 992, 864, 0, 0, 0, 0, 992, 608, 0, 0, 0, 0, 1184, 608, 0, 0, 0, 0, 1184, 544, 0, 0, 0, 0, 1376, 544, 0, 0, 0, 0, 1376, 288, 0, 0, 0, 0, 1440, 288, 0, 0, 0, 0, 1440, 224, 0, 0, 0, 0, 1632, 224, 0, 0, 0, 0, 1632, 544, 0, 0, 0, 0, 1760, 544, 0, 0, 0, 0, 1760, 800, 0, 0, 0, 0, 1376, 800)
 }
-point_count = 10
+point_count = 23
 
 [node name="LevelScene" instance=ExtResource("1_swlr5")]
 
 [node name="TileMap" parent="." index="0"]
-tile_set = ExtResource("2_2geie")
-layer_0/tile_data = PackedInt32Array(65538, 5, 0, 65539, 5, 0, 65540, 5, 0, 131076, 5, 0, 196612, 5, 0, 262145, 5, 0, 327681, 5, 0, 327682, 5, 0, 327683, 5, 0, 327684, 5, 0, 327685, 5, 0, 327686, 5, 0, 327687, 5, 0, 327688, 5, 0, 262152, 5, 0, 196616, 5, 0, 131080, 5, 0, 131081, 5, 0, 131082, 5, 0, 131083, 5, 0, 131084, 5, 0, 196620, 5, 0, 262156, 5, 0, 327692, 5, 0, 393228, 5, 0, 458764, 5, 0, 458763, 5, 0, 458762, 5, 0, 458761, 5, 0, 458760, 5, 0, 458759, 5, 0, 196611, 5, 0, 196610, 5, 0, 196609, 5, 0)
-layer_1/tile_data = PackedInt32Array(458758, 2, 0, 65537, 2, 65536)
-portal_positions = Array[Vector2i]([Vector2i(1, 1)])
-base_positions = Array[Vector2i]([Vector2i(6, 7)])
+layer_0/tile_data = PackedInt32Array(327683, 5, 0, 262147, 5, 0, 196611, 5, 0, 196612, 5, 0, 196613, 5, 0, 196614, 5, 0, 196615, 5, 0, 131080, 5, 0, 131081, 5, 0, 196617, 5, 0, 196618, 5, 0, 131079, 5, 0, 196619, 5, 0, 262155, 5, 0, 327691, 5, 0, 393227, 5, 0, 458763, 5, 0, 524299, 5, 0, 524298, 5, 0, 524297, 5, 0, 524296, 5, 0, 524295, 5, 0, 524294, 5, 0, 589830, 5, 0, 655366, 5, 0, 720902, 5, 0, 786438, 5, 0, 851974, 5, 0, 851975, 5, 0, 851976, 5, 0, 851977, 5, 0, 851978, 5, 0, 851979, 5, 0, 851980, 5, 0, 851981, 5, 0, 851982, 5, 0, 851983, 5, 0, 786447, 5, 0, 720911, 5, 0, 655375, 5, 0, 589839, 5, 0, 589840, 5, 0, 589841, 5, 0, 524306, 5, 0, 524307, 5, 0, 524308, 5, 0, 524309, 5, 0, 589842, 5, 0, 458773, 5, 0, 393237, 5, 0, 327701, 5, 0, 262165, 5, 0, 262166, 5, 0, 196630, 5, 0, 196631, 5, 0, 196632, 5, 0, 196633, 5, 0, 262169, 5, 0, 327705, 5, 0, 393241, 5, 0, 458777, 5, 0, 524314, 5, 0, 524313, 5, 0, 524315, 5, 0, 589851, 5, 0, 655387, 5, 0, 720923, 5, 0, 786459, 5, 0, 786458, 5, 0, 786457, 5, 0, 786456, 5, 0, 786455, 5, 0, 786454, 5, 0)
+layer_1/tile_data = PackedInt32Array(393219, 6, 0, 786453, 6, 0)
+portal_positions = Array[Vector2i]([Vector2i(3, 6)])
+base_positions = Array[Vector2i]([Vector2i(21, 12)])
 
 [node name="AttakerTower" parent="Builder" index="0" instance=ExtResource("3_2rec7")]
-position = Vector2(576, 576)
+position = Vector2(640, 448)
 
 [node name="EnemiesPath" parent="EnemiesKeeper" index="0"]
 curve = SubResource("Curve2D_3ufwt")
+
+[connection signal="tree_entered" from="EnemiesKeeper" to="EnemiesKeeper" method="_on_tree_entered"]

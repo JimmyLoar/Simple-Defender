@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" load_steps=17 format=3 uid="uid://dncj8xhcrtj37"]
 
-[ext_resource type="Texture2D" uid="uid://c0ei4tvs8efto" path="res://assets/svg_shapes/64/circle.svg" id="1_ck4ok"]
-[ext_resource type="Texture2D" uid="uid://8od2ygb3h2fy" path="res://assets/svg_shapes/64/cube.svg" id="2_mqywy"]
-[ext_resource type="Texture2D" uid="uid://by568t3mp33pm" path="res://assets/svg_shapes/64/diamond.svg" id="3_twhq8"]
-[ext_resource type="Texture2D" uid="uid://xttpd3arglm6" path="res://assets/svg_shapes/64/hexagon.svg" id="4_4eke5"]
-[ext_resource type="Texture2D" uid="uid://cqabo3c2dlfnt" path="res://assets/svg_shapes/64/pentagon.svg" id="5_h0x5l"]
-[ext_resource type="Texture2D" uid="uid://7q2idbvb85fi" path="res://assets/svg_shapes/64/square.svg" id="6_ksjp0"]
-[ext_resource type="Texture2D" uid="uid://b84wfn0gv5n47" path="res://assets/svg_shapes/64/star 0.svg" id="7_qhpjw"]
-[ext_resource type="Texture2D" uid="uid://h1we6gfmv8bu" path="res://assets/svg_shapes/64/triangle.svg" id="8_kfxch"]
+[ext_resource type="Texture2D" uid="uid://rvdyjrkkgour" path="res://assets/svg_shapes/64/circle.svg" id="1_ck4ok"]
+[ext_resource type="Texture2D" uid="uid://bdddndoilv55c" path="res://assets/svg_shapes/64/cube.svg" id="2_mqywy"]
+[ext_resource type="Texture2D" uid="uid://i772b0mbwuep" path="res://assets/svg_shapes/64/diamond.svg" id="3_twhq8"]
+[ext_resource type="Texture2D" uid="uid://echewrulx4aq" path="res://assets/svg_shapes/64/hexagon.svg" id="4_4eke5"]
+[ext_resource type="Texture2D" uid="uid://c23q66gnmr5oc" path="res://assets/svg_shapes/64/pentagon.svg" id="5_h0x5l"]
+[ext_resource type="Texture2D" uid="uid://b0c2qcg8cyvv7" path="res://assets/svg_shapes/64/square.svg" id="6_ksjp0"]
+[ext_resource type="Texture2D" uid="uid://c5ud6hqwa2edo" path="res://assets/svg_shapes/64/star 0.svg" id="7_qhpjw"]
+[ext_resource type="Texture2D" uid="uid://ctp07vdo6p61r" path="res://assets/svg_shapes/64/triangle.svg" id="8_kfxch"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vr4g1"]
 texture = ExtResource("1_ck4ok")

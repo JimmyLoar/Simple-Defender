@@ -12,7 +12,7 @@ script = ExtResource("3_3e80y")
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ofe3m")
-size = Vector2i(64, 64)
+size = Vector2i(32, 32)
 shape = SubResource("Resource_ctp4i")
 fill_type = 0
 fill_color = Color(0.968627, 0, 0.282353, 1)
@@ -37,7 +37,7 @@ script = ExtResource("3_3e80y")
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ofe3m")
-size = Vector2i(14, 14)
+size = Vector2i(7, 7)
 shape = SubResource("Resource_60wqk")
 fill_type = 0
 fill_color = Color(1, 1, 1, 1)
@@ -65,7 +65,7 @@ star_inset = 0.5
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("2_ofe3m")
-size = Vector2i(16, 16)
+size = Vector2i(8, 8)
 shape = SubResource("Resource_xlb4b")
 fill_type = 0
 fill_color = Color(1, 1, 1, 1)
@@ -84,11 +84,11 @@ rotation = -180.0
 scale = Vector2(1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ejty4"]
-radius = 26.0
+radius = 16.0
 
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_5k3eo")
-move_speed = 512
+move_speed = 1024
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -96,16 +96,16 @@ texture = SubResource("Texture2D_p8mqs")
 
 [node name="Decagon" type="Sprite2D" parent="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
-position = Vector2(-9, -4)
+position = Vector2(-5, -4)
 texture = SubResource("Texture2D_ukifh")
 
 [node name="Decagon2" type="Sprite2D" parent="Sprite2D"]
 self_modulate = Color(1, 1, 0, 1)
-position = Vector2(8, -4)
+position = Vector2(5, -4)
 texture = SubResource("Texture2D_ukifh")
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(0, 13)
+position = Vector2(0, 7)
 texture = SubResource("Texture2D_4i8gv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

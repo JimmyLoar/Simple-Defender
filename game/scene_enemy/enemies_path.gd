@@ -1,6 +1,8 @@
 class_name EnemiesPath
 extends Path2D
 
+signal enemies_is_ever
+
 @export var test_enemy_scene : PackedScene
 
 var cooldown := 0.5
@@ -56,6 +58,8 @@ func _on_dissapear_enemy(enemy: Enemy):
 	_pool.append(enemy)
 	follower.remove_child(enemy)
 	follower._enemy = null
+	if get_child_count() - 1 == 0:
+		enemies_is_ever.emit()
 
 
 class EnemyPathFollower:
@@ -76,5 +80,5 @@ class EnemyPathFollower:
 		if not _enemy: return
 		progress += delta * _enemy.move_speed
 		if progress_ratio >= 1:
-			get_parent()._logger.debug("enemy %s finished" % _enemy)
+			get_parent()._logger.debug("finished enemy %s" % _enemy)
 			_enemy.emit_signal("finished", _enemy)

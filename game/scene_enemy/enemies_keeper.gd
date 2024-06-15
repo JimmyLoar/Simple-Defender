@@ -1,12 +1,17 @@
 class_name EnemiesKeeper
 extends Node2D
 
+signal path_cleared
+
 @export_range(1, 8, 1) var path_count := 1
 
 @export_group("Generation", "_gen_")
 @export var _gen_min_count_in_wave := 5
 @export var _gen_grow_count_from_wave := 0.1
 @export var _gen_max_count_in_wave := 10
+
+var _clearing_path := []
+var _logger := GodotLogger.with("EnemiesKeeper")
 
 
 func generate_wave(wave: int = 0):
@@ -16,3 +21,28 @@ func generate_wave(wave: int = 0):
 
 func get_packed_enemy(enemy_name: StringName):
 	pass
+
+
+func _ready():
+	_connection_paths()
+	#call_deferred("_connection_paths")
+
+
+func _connection_paths():
+	for path: EnemiesPath in get_children():
+		var err = path.enemies_is_ever.connect(_on_enemies_is_over.bind(path))
+		_logger.debug("connect path [color=yellow]%s[/color] error is '%s'" % [path, err])
+
+
+func _on_enemies_is_over(path: EnemiesPath):
+	if _clearing_path.has(path):
+		_logger.warn("path %s duble clearing" % path)
+		return
+	
+	_clearing_path.append(path)
+	_logger.debug("path [color=yellow]%s[/color] clear!" % path)
+	if _clearing_path.size() == get_child_count():
+		_clearing_path.clear()
+		path_cleared.emit()
+
+

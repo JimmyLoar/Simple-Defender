@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfxomskymqv1a"]
 
 [ext_resource type="Script" path="res://game/scene_level/level.gd" id="1_mc6dh"]
-[ext_resource type="TileSet" uid="uid://0hadit6i7vn0" path="res://game/scene_level/tileset/32.tres" id="2_3vp6q"]
+[ext_resource type="TileSet" uid="uid://dncj8xhcrtj37" path="res://game/scene_level/tileset/64.tres" id="2_iwvoq"]
 [ext_resource type="Script" path="res://game/scene_level/level_tilemap.gd" id="3_nn2nk"]
 [ext_resource type="Script" path="res://game/scene_enemy/enemies_keeper.gd" id="4_bh3p7"]
 [ext_resource type="Script" path="res://game/scene_enemy/enemies_path.gd" id="5_322nf"]
@@ -10,7 +10,7 @@
 script = ExtResource("1_mc6dh")
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource("2_3vp6q")
+tile_set = ExtResource("2_iwvoq")
 format = 2
 layer_0/name = "Road"
 layer_1/name = "Objects"
