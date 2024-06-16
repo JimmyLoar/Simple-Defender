@@ -31,4 +31,5 @@ func _save():
 		_logger.error("cannot save data (%s), error %s" % [self.resource_path.get_file(), error_string(err)])
 	
 	else:
-		_logger.debug("save data (%s) succes!" % [self.resource_path.get_file()])
+		_logger.info("save data (%s) succes!" % [self.resource_path.get_file()])
+		_logger.debug("saved data: \n[color=%s]%s%s" % [GodotLogger.COLORS.debug, " ".repeat(28), _data])

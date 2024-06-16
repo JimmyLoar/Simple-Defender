@@ -2,8 +2,8 @@ extends Node
 
 
 var _data := {
-	enemy = preload("uid://bmvdju2w8ahex"),
-	tower = preload("uid://blxxfifblmdfe")
+	enemy = preload("res://game/!database/libs/enemies.tres"),
+	tower = preload("res://game/!database/libs/towers.tres")
 }
 
 

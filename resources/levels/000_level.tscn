@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://di415odfl7wxf"]
 
 [ext_resource type="PackedScene" uid="uid://dfxomskymqv1a" path="res://game/scene_level/level.tscn" id="1_swlr5"]
-[ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="3_2rec7"]
+[ext_resource type="PackedScene" uid="uid://dwyk03g5syqfr" path="res://game/scene_tower/towers/gun_tower.tscn" id="2_j5o4d"]
 
 [sub_resource type="Curve2D" id="Curve2D_3ufwt"]
 _data = {
@@ -17,8 +17,8 @@ layer_1/tile_data = PackedInt32Array(393219, 6, 0, 786453, 6, 0)
 portal_positions = Array[Vector2i]([Vector2i(3, 6)])
 base_positions = Array[Vector2i]([Vector2i(21, 12)])
 
-[node name="AttakerTower" parent="Builder" index="0" instance=ExtResource("3_2rec7")]
-position = Vector2(672, 480)
+[node name="GunTower" parent="Builder" index="0" instance=ExtResource("2_j5o4d")]
+position = Vector2(544, 224)
 
 [node name="EnemiesPath" parent="EnemiesKeeper" index="0"]
 curve = SubResource("Curve2D_3ufwt")
