@@ -4,12 +4,23 @@ extends Node2D
 @export var tower_name := "TowerBase"
 @export var size := 1: set = set_size
 
-
 @onready var radar = $TowerRadar
 @onready var body = $BodyCompanent
 
+@onready var data := Database.get_towers_lib()
 
 var _logger: Log : get = _get_logger
+
+
+func _init():
+	if not ready.is_connected(_add_to_data):
+		ready.connect(_add_to_data)
+
+
+func _add_to_data():
+	var data_key: String = tower_name.to_snake_case()
+	if not data or data.has(data_key): return
+	data.add_data(data_key, scene_file_path)
 
 
 func set_size(value: int):

@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 GodotLogger="*res://addons/logger/logger.gd"
 LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+Database="*res://game/!database/database.gd"
 
 [display]
 

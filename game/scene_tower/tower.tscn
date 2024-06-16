@@ -40,6 +40,7 @@ scale = Vector2(1, 1)
 
 [node name="Tower" type="Node2D"]
 script = ExtResource("1_ybaeh")
+tower_name = null
 size = 2
 
 [node name="TowerRadar" type="Area2D" parent="."]

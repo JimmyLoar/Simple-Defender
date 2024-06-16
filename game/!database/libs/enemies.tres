@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DataLib" load_steps=2 format=3 uid="uid://bmvdju2w8ahex"]
+
+[ext_resource type="Script" path="res://game/!database/data_lib.gd" id="1_5iol4"]
+
+[resource]
+script = ExtResource("1_5iol4")
+_data = {
+"normal": "res://game/scene_enemy/enemy.tscn"
+}

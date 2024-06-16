@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DataLib" load_steps=2 format=3 uid="uid://blxxfifblmdfe"]
+
+[ext_resource type="Script" path="res://game/!database/data_lib.gd" id="1_404wm"]
+
+[resource]
+script = ExtResource("1_404wm")
+_data = {
+"attacker_tower": "res://game/scene_tower/attaker_tower.tscn"
+}
