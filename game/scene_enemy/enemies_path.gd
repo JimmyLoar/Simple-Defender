@@ -23,6 +23,7 @@ func _init():
 func spawn(enemy_name: StringName = '',):
 	if _timer.is_stopped():
 		var enemy := _create_enemy()
+		enemy.reset()
 		var follower := EnemyPathFollower.new(enemy)
 		add_child(follower)
 		_logger.debug("spawn new enemy (%s)" % enemy)
@@ -48,16 +49,16 @@ func _create_enemy() -> Enemy:
 		new.finished.connect(_on_dissapear_enemy)
 		new.dead.connect(_on_dissapear_enemy)
 		return new
-	
 	return _pool.pop_front()
 
 
 func _on_dissapear_enemy(enemy: Enemy):
+	if not enemy.get_parent(): return
 	var follower := enemy.get_parent()
-	remove_child(follower)
-	_pool.append(enemy)
 	follower.remove_child(enemy)
 	follower._enemy = null
+	remove_child(follower)
+	_pool.append(enemy)
 	if get_child_count() - 1 == 0:
 		enemies_is_ever.emit()
 

@@ -9,8 +9,14 @@ signal finished(enemy: Enemy)
 
 @onready var data: DataLib = Database.get_enemies_lib()
 
+var is_death = false
+
 func _init():
 	ready.connect(_add_to_data)
+
+
+func reset():
+	is_death = false
 
 
 func _add_to_data():
@@ -19,5 +25,10 @@ func _add_to_data():
 	data.add_data(data_key, scene_file_path)
 
 
+func _enter_tree():
+	show()
+
+
 func death():
+	is_death = true
 	emit_signal("dead", self)

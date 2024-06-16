@@ -9,7 +9,7 @@ signal targets_changed
 
 var collision : CollisionShape2D
 
-var _logger : Log
+@onready var _logger : Log = GodotLogger.with("%s.Radar<%s>" % [get_parent().name, get_parent().get_instance_id()])
 
 var _queue_targets: Array[Node2D] = []
 
@@ -35,7 +35,7 @@ func set_target_mode(value: int = -1):
 		0: collision_mask = 20.0
 		1: collision_mask = 10.0
 	
-	_get_logger().debug("set target mode %s, mask %d" % [["None", "Enemies", "Allies"][target_mode + 1], collision_mask])
+	_logger.debug("set target mode %s, mask %d" % [["None", "Enemies", "Allies"][target_mode + 1], collision_mask])
 
 
 func set_vition_range(value: float):
@@ -46,14 +46,7 @@ func set_vition_range(value: float):
 	vition_range = value
 	var cell_size = ProjectSettings.get_setting("game/level/cell/size", 64)
 	collision.shape.radius = (vition_range - 0.5) * cell_size 
-	_get_logger().debug("set vision range on %0.2f tiles" % [vition_range])
-
-
-func _get_logger():
-	if _logger: return _logger
-	var parent = get_parent() as TowerBase
-	_logger = GodotLogger.with("%s.Radar" % [parent.tower_name if parent else "Nill"])
-	return _logger
+	_logger.debug("set vision range on %0.2f tiles" % [vition_range])
 
 
 func _on_target_entered(new_target: Node2D):

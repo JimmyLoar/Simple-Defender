@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2x7dmjgjsu41"]
+
+[ext_resource type="Script" path="res://game/scene_tower/projectiles/!projectile.gd" id="1_3i6fm"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/shape_texture_2d.gd" id="2_t7l8a"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/drawable_ellipse.gd" id="3_mf4uh"]
+
+[sub_resource type="Resource" id="Resource_vr23q"]
+script = ExtResource("3_mf4uh")
+
+[sub_resource type="Texture2D" id="Texture2D_kxrnm"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_t7l8a")
+size = Vector2i(12, 12)
+shape = SubResource("Resource_vr23q")
+fill_type = 0
+fill_color = Color(1, 0.231373, 1, 1)
+fill_from = Vector2(0, 0)
+fill_to = Vector2(1, 0)
+fill_repeat = "pad"
+stroke_type = 0
+stroke_width = 0.0
+stroke_color = Color(0, 0, 0, 1)
+stroke_from = Vector2(0, 0)
+stroke_to = Vector2(1, 0)
+stroke_repeat = "pad"
+stroke_joint = "round"
+offset = Vector2(0, 0)
+rotation = 0.0
+scale = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhu4u"]
+radius = 6.0
+
+[node name="Projectile" type="Area2D"]
+position = Vector2(50, 82)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_3i6fm")
+begun_speed = 500
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("Texture2D_kxrnm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xhu4u")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_dissapear"]

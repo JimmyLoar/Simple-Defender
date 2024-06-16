@@ -1,16 +1,21 @@
 class_name TowerWeapon
 extends Node2D
 
+@export var base_damage := 1
+@export var base_recharge := 1.0
+
 var main_target : Node2D
 var targets: Array[Node2D] = []
 var radar : TowerRadarCompanent
+var recharger := Timer.new()
 
-var _logger: Log : get = _get_logger 
-func _get_logger():
-	if _logger: return _logger
-	var parent = get_parent() as TowerBase
-	_logger = GodotLogger.with("%s.Radar" % [parent.tower_name if parent else "Nill"])
-	return _logger
+@onready var _logger: Log = GodotLogger.with("%s.Radar" % [get_parent().name])
+
+var _ready_to_shoot := true
+
+func _init():
+	add_child(recharger)
+	recharger.timeout.connect(_on_recharged)
 
 
 func _target_chenged(_radar: TowerRadarCompanent):
@@ -23,9 +28,14 @@ func _target_chenged(_radar: TowerRadarCompanent):
 func _physics_process(delta):
 	if main_target:
 		look_at(main_target.global_position)
+		if not _ready_to_shoot: return 
+		_ready_to_shoot = false
+		recharger.start(base_recharge)
+		_shoot()
 	
 	else:
 		_find_target()
+	
 
 
 func _find_target():
@@ -34,6 +44,8 @@ func _find_target():
 
 
 func _shoot():
-	_get_logger().debug("shoting")
+	_logger.debug("shoting")
 
 
+func _on_recharged():
+	_ready_to_shoot = true
