@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://64h3lvpekpcf"]
+
+[ext_resource type="PackedScene" uid="uid://c1ghch3rbl7il" path="res://game/scene_tower/weapon.tscn" id="1_0m0gd"]
+[ext_resource type="Script" path="res://game/scene_tower/weapons/weapon_projectile.gd" id="2_61tea"]
+
+[node name="WeaponProjectile" instance=ExtResource("1_0m0gd")]
+script = ExtResource("2_61tea")
+projectile = null
+base_damage = 1
+base_recharge = 0
