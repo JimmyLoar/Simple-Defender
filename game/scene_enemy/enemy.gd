@@ -1,22 +1,30 @@
 class_name Enemy
 extends Area2D
 
-signal dead(enemy: Enemy)
 signal finished(enemy: Enemy)
 
 @export var enemy_name := "Normal"
 @export var move_speed := 64
 
 @onready var data: DataLib = Database.get_enemies_lib()
+@onready var _logger := GodotLogger.with("%s" % self)
 
 var is_death = false
+var _hit_points := HitpointsCompanent.new(10)
+
 
 func _init():
 	ready.connect(_add_to_data)
 
 
+func _ready() -> void:
+	_hit_points._logger = _logger
+	add_child(_hit_points)
+	_logger.debug("add hp bar %s" % _hit_points)
+
+
 func reset():
-	is_death = false
+	_hit_points.reset()
 
 
 func _add_to_data():
@@ -29,6 +37,10 @@ func _enter_tree():
 	show()
 
 
-func death():
-	is_death = true
-	emit_signal("dead", self)
+func get_hit_points() -> HitpointsCompanent:
+	return _hit_points
+
+
+func is_dead():
+	return _hit_points.is_dead()
+

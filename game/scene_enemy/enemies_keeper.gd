@@ -25,7 +25,6 @@ func get_packed_enemy(enemy_name: StringName):
 
 func _ready():
 	_connection_paths()
-	#call_deferred("_connection_paths")
 
 
 func _connection_paths():
@@ -40,9 +39,12 @@ func _on_enemies_is_over(path: EnemiesPath):
 		return
 	
 	_clearing_path.append(path)
-	_logger.debug("path [color=yellow]%s[/color] clear!" % path)
 	if _clearing_path.size() == get_child_count():
 		_clearing_path.clear()
+		_logger.info("all paths cleared!")
+		GodotLogger.info("")
 		path_cleared.emit()
+		return
+	_logger.debug("path [color=yellow]%s[/color] clear!" % path)
 
 

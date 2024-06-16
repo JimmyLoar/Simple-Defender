@@ -12,7 +12,7 @@ func _shoot():
 	var projectile := _create_projectile()
 	projectile.launch(gunpoint_marker.global_transform)
 	projectile_box.add_child(projectile)
-	_logger.info("shooting")
+	_logger.debug("shooting %s" % projectile)
 
 
 func _create_projectile() -> Projectile:
@@ -30,6 +30,6 @@ func _remove_projectile(projectile: Node2D):
 
 
 func _on_hitted(enemy: Enemy, projectile: Projectile):
-	_logger.debug("projectile %s hitted on %s" % [enemy, projectile])
-	enemy.death()
+	_logger.debug("projectile %s hitted on %s" % [projectile, enemy])
+	enemy.get_hit_points().take_damage(3)
 

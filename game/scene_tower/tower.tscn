@@ -40,17 +40,18 @@ scale = Vector2(1, 1)
 
 [node name="Tower" type="Node2D"]
 script = ExtResource("1_ybaeh")
-tower_name = null
 size = 2
 
-[node name="TowerRadar" type="Area2D" parent="."]
+[node name="Radar" type="Area2D" parent="."]
+unique_name_in_owner = true
 disable_mode = 2
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("4_x5ixg")
 vition_range = 4.4
 
-[node name="BodyCompanent" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("3_vmrq8")

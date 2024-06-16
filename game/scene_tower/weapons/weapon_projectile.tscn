@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://game/scene_tower/weapons/weapon_projectile.gd" id="2_61tea"]
 [ext_resource type="PackedScene" uid="uid://d2x7dmjgjsu41" path="res://game/scene_tower/projectiles/!projectile.tscn" id="3_l53qf"]
 
-[node name="WeaponProjectile" instance=ExtResource("1_0m0gd")]
+[node name="WProjectile" instance=ExtResource("1_0m0gd")]
 script = ExtResource("2_61tea")
 projectile_packed = ExtResource("3_l53qf")
 

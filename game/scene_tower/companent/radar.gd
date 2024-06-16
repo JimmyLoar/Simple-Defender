@@ -9,7 +9,7 @@ signal targets_changed
 
 var collision : CollisionShape2D
 
-@onready var _logger : Log = GodotLogger.with("%s.Radar<%s>" % [get_parent().name, get_parent().get_instance_id()])
+@onready var _logger : Log = GodotLogger.with("%s.Radar" % [get_parent()])
 
 var _queue_targets: Array[Node2D] = []
 

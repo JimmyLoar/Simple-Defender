@@ -8,6 +8,3 @@ script = ExtResource("2_4bkew")
 weapon_packed = null
 tower_name = "AttackerTower"
 size = 1
-
-[node name="TowerRadar" parent="." index="0"]
-vition_range = 3.2

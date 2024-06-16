@@ -2,16 +2,17 @@ class_name TowerWeapon
 extends Node2D
 
 @export var base_damage := 1
-@export var base_recharge := 1.0
+@export var base_recharge := 0.1
 
 var main_target : Node2D
 var targets: Array[Node2D] = []
 var radar : TowerRadarCompanent
 var recharger := Timer.new()
 
-@onready var _logger: Log = GodotLogger.with("%s.Radar" % [get_parent().name])
+@onready var _logger: Log = GodotLogger.with("%s.%s" % [get_parent(), self.name])
 
 var _ready_to_shoot := true
+
 
 func _init():
 	add_child(recharger)

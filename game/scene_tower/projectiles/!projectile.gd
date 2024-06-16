@@ -1,6 +1,7 @@
 class_name Projectile
 extends Area2D
 
+##return signals to launched tower weapon
 signal hitted(enemy: Enemy)
 signal dissappeared
 
@@ -29,7 +30,7 @@ func launch(new_transform: Transform2D):
 
 
 func _on_area_entered(enemy: Enemy):
-	if not enemy.is_death:
+	if not enemy.is_dead():
 		emit_signal("hitted", enemy)
 	_dissapear()
 

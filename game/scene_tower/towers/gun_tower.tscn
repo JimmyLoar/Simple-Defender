@@ -6,6 +6,3 @@
 [node name="GunTower" instance=ExtResource("1_qgbq2")]
 weapon_packed = ExtResource("2_kxoyg")
 tower_name = "Gun"
-
-[node name="TowerRadar" parent="." index="0"]
-vition_range = 6.0

@@ -11,7 +11,7 @@ var _pool := []
 var _timer := Timer.new()
 var _queue_request := []
 
-var _logger := GodotLogger.with("EnemiesPath")
+@onready var _logger := GodotLogger.with("%s" % [self])
 
 func _init():
 	add_child(_timer)
@@ -46,8 +46,8 @@ func _do_spawn_request():
 func _create_enemy() -> Enemy:
 	if _pool.is_empty():
 		var new: Enemy = preload("res://game/scene_enemy/enemy.tscn").instantiate()
-		new.finished.connect(_on_dissapear_enemy)
-		new.dead.connect(_on_dissapear_enemy)
+		new.finished.connect(_on_dissapear_enemy.bind(new))
+		new.get_hit_points().death.connect(_on_dissapear_enemy.bind(new))
 		return new
 	return _pool.pop_front()
 
@@ -76,10 +76,9 @@ class EnemyPathFollower:
 		_enemy = enemy
 		add_child(_enemy)
 	
-	
 	func _physics_process(delta):
 		if not _enemy: return
 		progress += delta * _enemy.move_speed
 		if progress_ratio >= 1:
 			get_parent()._logger.debug("finished enemy %s" % _enemy)
-			_enemy.emit_signal("finished", _enemy)
+			_enemy.finished.emit()

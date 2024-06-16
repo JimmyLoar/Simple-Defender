@@ -10,6 +10,7 @@
 script = ExtResource("1_mc6dh")
 
 [node name="TileMap" type="TileMap" parent="."]
+unique_name_in_owner = true
 tile_set = ExtResource("2_iwvoq")
 format = 2
 layer_0/name = "Road"
@@ -18,8 +19,10 @@ layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_nn2nk")
 
 [node name="Builder" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="EnemiesKeeper" type="Node2D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_bh3p7")
 
 [node name="EnemiesPath" type="Path2D" parent="EnemiesKeeper"]
