@@ -2,7 +2,7 @@ class_name TowerWeapon
 extends Node2D
 
 @export var base_damage := 1
-@export var base_recharge := 0.1
+@export var base_recharge := 0.35
 
 var main_target : Node2D
 var targets: Array[Node2D] = []

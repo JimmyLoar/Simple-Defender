@@ -8,4 +8,4 @@
 script = ExtResource("2_61tea")
 projectile_packed = ExtResource("3_l53qf")
 
-[node name="ProjectileBox" type="Node" parent="." index="2"]
+[node name="ProjectileBox" type="CanvasLayer" parent="." index="2"]

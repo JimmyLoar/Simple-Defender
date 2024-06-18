@@ -11,7 +11,7 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Resource" id="Resource_a4y22"]
 script = ExtResource("5_r745y")
-points = 6
+points = 4
 is_star = false
 star_inset = 0.5
 
@@ -19,7 +19,7 @@ star_inset = 0.5
 resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("4_yhmi7")
-size = Vector2i(64, 64)
+size = Vector2i(52, 52)
 shape = SubResource("Resource_a4y22")
 fill_type = 0
 fill_color = Color(1, 1, 0.584314, 1)
@@ -35,7 +35,7 @@ stroke_to = Vector2(1, 0)
 stroke_repeat = "pad"
 stroke_joint = "round"
 offset = Vector2(0, 0)
-rotation = 30.0
+rotation = 0.0
 scale = Vector2(1, 1)
 
 [node name="Tower" type="Node2D"]
