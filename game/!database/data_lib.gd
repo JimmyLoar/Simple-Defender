@@ -2,16 +2,16 @@ class_name DataLib
 extends Resource
 
 
-@export var _data := {
-	
-}
+@export var _data:= Dictionary()
+var _logger:= GodotLogger.with("DataLib")
 
-var _logger := GodotLogger.with("DataLib")
+
+func _init(new_data := {}) -> void:
+	_data = new_data
 
 
 func add_data(key, value):
 	_data[key] = value
-	_save()
 
 
 func has(key: String):
@@ -25,11 +25,13 @@ func get_data(key: String):
 	return _data[key]
 
 
-func _save():
-	var err = ResourceSaver.save(self, self.resource_path)
-	if err != OK: 
-		_logger.error("cannot save data (%s), error %s" % [self.resource_path.get_file(), error_string(err)])
-	
-	else:
-		_logger.info("save data (%s) succes!" % [self.resource_path.get_file()])
-		_logger.debug("saved data: \n[color=%s]%s%s" % [GodotLogger.COLORS.debug, " ".repeat(28), _data])
+func get_all_data() -> Dictionary:
+	return _data
+
+
+func _init_logger():
+	_logger = GodotLogger.with("DataLib")
+
+
+
+
