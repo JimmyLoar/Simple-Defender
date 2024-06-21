@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DataTower" load_steps=2 format=3 uid="uid://btcy65untytgp"]
+
+[ext_resource type="Script" path="res://game/!database/data_tower.gd" id="1_bmab7"]
+
+[resource]
+script = ExtResource("1_bmab7")
+base_damage = 5
+base_vision_range = 7.5
+base_firerate_in_second = 1.0

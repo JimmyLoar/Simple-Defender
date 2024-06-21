@@ -18,6 +18,8 @@ func _ready():
 	waves.wave_started.connect(enemy_keeper.generate_wave)
 	enemy_keeper.path_cleared.connect(waves.start_wave)
 	
+	
+	
 	#start game
 	waves.call_deferred("start_wave")
 

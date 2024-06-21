@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DataTower" load_steps=2 format=3 uid="uid://dpdocw7khiyom"]
+
+[ext_resource type="Script" path="res://game/!database/data_tower.gd" id="1_vc6vm"]
+
+[resource]
+script = ExtResource("1_vc6vm")
+base_damage = 3
+base_vision_range = 3.4
+base_firerate_in_second = 5.0

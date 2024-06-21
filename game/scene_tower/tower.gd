@@ -4,10 +4,16 @@ extends Node2D
 @export var tower_name := "TowerBase"
 @export var size := 1: set = set_size
 
+@export var _data: DataTower:
+	set(value):
+		_data = value
+		if not value: return
+
 @onready var radar = %Radar
 @onready var body = %Body
 
-@onready var data := Database.get_towers_lib()
+@onready var data : DataTower = Database.get_towers_lib().get_data(&"gun_main")
+@onready var properties : DataProperties
 @onready var _logger: Log = GodotLogger.with("%s" % [self])
 
 
@@ -19,7 +25,7 @@ func _init():
 func _add_to_data():
 	var data_key: String = tower_name.to_snake_case()
 	if not data or data.has(data_key): return
-	data.add_data(data_key, scene_file_path)
+	#data.add_data(data_key, scene_file_path)
 
 
 func set_size(value: int):
@@ -30,5 +36,6 @@ func set_size(value: int):
 	size = clamp(value, 1, 16)
 	$Body.set_size(size)
 	_logger.debug("set size on %d (%s tiles)" % [size, size * size])
+
 
 
