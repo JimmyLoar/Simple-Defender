@@ -228,8 +228,8 @@ func _get_log_path():
 	var path_array = log_path.rsplit(".", true, 1)
 	var time = _get_time(true)
 	if Engine.is_editor_hint(): 
-		return  "%s_editor_%s.%s" % [path_array[0], time, path_array[1]]
-	return "%s_%s.%s" % [path_array[0], time, path_array[1]]
+		return  "%s_%s_editor.%s" % [time, path_array[0], path_array[1]]
+	return "%s_%s.%s" % [time, path_array[0], path_array[1]]
 
 
 func _get_global_logger():
