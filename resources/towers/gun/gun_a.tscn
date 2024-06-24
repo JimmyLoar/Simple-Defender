@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1q633thkbijm"]
+
+[ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="1_sqqjr"]
+[ext_resource type="PackedScene" uid="uid://64h3lvpekpcf" path="res://game/scene_tower/weapons/weapon_projectile.tscn" id="2_kvkdw"]
+
+[node name="GunTower" instance=ExtResource("1_sqqjr")]
+weapon_packed = ExtResource("2_kvkdw")
+tower_name = "Gun"

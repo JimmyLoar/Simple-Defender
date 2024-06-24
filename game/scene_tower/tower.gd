@@ -4,33 +4,27 @@ extends Node2D
 @export var tower_name := "TowerBase"
 @export var size := 1: set = set_size
 
-@export var _data: DataTower:
-	set(value):
-		_data = value
-		if not value: return
-
 @onready var radar = %Radar
 @onready var body = %Body
 
-@onready var data : DataTower = Database.get_towers_lib().get_data(&"gun_main")
+
 @onready var properties : DataProperties
-@onready var _logger: Log = GodotLogger.with("%s" % [self])
+var _logger: Log = GodotLogger.with("%s" % [self])
 
 
-func _init():
-	if not ready.is_connected(_add_to_data):
-		ready.connect(_add_to_data)
+func _init() -> void:
+	ready.connect(_update_info)
 
 
-func _add_to_data():
-	var data_key: String = tower_name.to_snake_case()
-	if not data or data.has(data_key): return
-	#data.add_data(data_key, scene_file_path)
+func _update_info():
+	name = tower_name
+	_logger.debug("tower has %s and %s" % [$Radar, $Body])
 
 
 func set_size(value: int):
 	if not is_inside_tree(): 
-		call_deferred("set_size", value)
+		#call_deferred("set_size", value)
+		#breakpoint
 		return
 	
 	size = clamp(value, 1, 16)

@@ -24,7 +24,7 @@ func change_mode(new_mode: Mode):
 func _input(event: InputEvent) -> void:
 	if event.is_action_released('buuild_tower_1') and _mode != Mode.BUILD:
 		change_mode(Mode.BUILD)
-		_cursor.select_tower = "gun"
+		_cursor.select_tower = "gun_main"
 		return
 	
 	elif event.is_action_released('buuild_tower_1') and _mode == Mode.BUILD:
@@ -37,20 +37,15 @@ func _input(event: InputEvent) -> void:
 
 
 func build_tower(tower_name: String):
+	place_cheker.add_busy_place(_cursor.get_cell_position())
 	var tower = _get_tower(tower_name)
 	tower.position = _cursor.get_center_position()
 	add_child(tower)
-	place_cheker.add_busy_place(_cursor.get_cell_position())
 	_logger.info("builded tower %s" % tower.tower_name)
 
 
 func _get_tower(tower_name: String) -> TowerBase:
-	var path : String = Database.get_towers_lib().get_data(tower_name)
-	if not path: return null
-	var _scene : PackedScene = load(path) 
-	if not _scene: return null 
-	var tower : TowerBase = _scene.instantiate()
-	return tower
+	return Database.get_towers_lib().get_node(tower_name)
 
 
 class HalographicCursor:

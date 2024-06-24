@@ -4,10 +4,10 @@ extends Node
 
 var _data := {
 	tower = DataLib.new({
-		&"gun_main": preload('res://resources/towers/gun/gun_main.tres'),
-		&"gun_a": preload('res://resources/towers/gun/gun_a.tres'),
-		&"gun_b": preload('res://resources/towers/gun/gun_b.tres'),
-		&"gun_c": preload('res://resources/towers/gun/gun_c.tres'),
+		&"gun_main": preload('res://resources/towers/gun/gun_main.tscn'),
+		&"gun_a": preload('res://resources/towers/gun/gun_a.tscn'),
+		&"gun_b": preload('res://resources/towers/gun/gun_b.tscn'),
+		&"gun_c": preload('res://resources/towers/gun/gun_c.tscn'),
 	}),
 	enemy = DataLib.new({
 		
