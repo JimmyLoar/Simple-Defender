@@ -14,10 +14,10 @@ enum LogLevel {
 
 const COLORS = {
 	"debug" : "#BEFFE7",
-	"info"  : "white",
 	"warn"  : "yellow",
 	"error" : "red",
 }
+var INFO_COLOR : String = Color.WHITE.to_html() 
 
 const LOG_FORMAT = "{level} [{time}]{prefix} {message} "
 
@@ -111,7 +111,7 @@ func _get_time(file_format := false) -> String:
 	now.hour = "%02d" % now.hour
 	now.minute = "%02d" % now.minute
 	now.second = "%02d" % now.second
-	if file_format: return "{day}.{month}.{year}_{hour}.{minute}.{second}".format(now)
+	if file_format: return "{day}-{month}-{year} {hour}-{minute}-{second}".format(now)
 	return "{day}/{month}/{year} {hour}:{minute}:{second}".format(now)
 
 
@@ -158,7 +158,8 @@ func _print_msg(log_level, msg: String):
 			if printing_stack: print_stack()
 		
 		LogLevel.INFO:
-			print_rich("[color={info}]%s[/color]".format(COLORS) % [msg])
+			print_rich("[color=#%s]%s[/color]" % [INFO_COLOR, msg])
+			INFO_COLOR = Color.WHITE.to_html()
 		
 		LogLevel.WARN:
 			print_rich("[color={warn}]%s[/color]".format(COLORS) % [msg])
@@ -186,7 +187,8 @@ func debug(message:String,values={}):
 	call_thread_safe("logger",message,values,LogLevel.DEBUG)
 
 
-func info(message:String,values={}):
+func info(message:String, values={}, color := Color.WHITE):
+	INFO_COLOR = color.to_html()
 	call_thread_safe("logger",message,values)
 
 
@@ -225,11 +227,16 @@ func _remove_bbcode(msg: String):
 
 
 func _get_log_path():
-	var path_array = log_path.rsplit(".", true, 1)
-	var time = _get_time(true)
+	var _array = log_path.rsplit("/", true, 1)
+	var path := {
+		"path" = _array[0],
+		"filename" = _array[1].get_basename(),
+		"extension" = _array[1].get_extension(),
+		"time" = _get_time(true)
+	} 
 	if Engine.is_editor_hint(): 
-		return  "%s_%s_editor.%s" % [time, path_array[0], path_array[1]]
-	return "%s_%s.%s" % [time, path_array[0], path_array[1]]
+		return  "{path}/{time} {filename} editor.{extension}".format(path)
+	return "{path}/{time} {filename}.{extension}".format(path)
 
 
 func _get_global_logger():
@@ -241,3 +248,4 @@ func _get_global_logger():
 func _load_file():
 	var filename: String = _get_log_path()
 	_file = FileAccess.open(filename, FileAccess.WRITE)
+
