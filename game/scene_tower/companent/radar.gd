@@ -9,7 +9,7 @@ signal targets_changed
 
 var collision : CollisionShape2D
 
-@onready var _logger : Log = GodotLogger.with("%s.Radar" % [get_parent()])
+var _logger : Log = GodotLogger.with("%s" % [self])
 
 var _queue_targets: Array[Node2D] = []
 
@@ -25,10 +25,6 @@ func _init():
 
 
 func set_target_mode(value: int = -1):
-	if not is_inside_tree():
-		call_deferred("set_target_mode", value)
-		return
-	
 	target_mode = value
 	collision.disabled = target_mode < 0
 	match target_mode:
@@ -39,10 +35,6 @@ func set_target_mode(value: int = -1):
 
 
 func set_vition_range(value: float):
-	if not is_inside_tree():
-		call_deferred("set_vition_range", value)
-		return
-	
 	vition_range = value
 	var cell_size = ProjectSettings.get_setting("game/level/cell/size", 64)
 	collision.shape.radius = (vition_range - 0.5) * cell_size 

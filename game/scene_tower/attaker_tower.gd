@@ -6,8 +6,8 @@ extends TowerBase
 var weapon : TowerWeapon
 
 
-func _init():
-	ready.connect(_init_weapon)
+func _ready() -> void:
+	_init_weapon()
 
 
 func _init_weapon():
