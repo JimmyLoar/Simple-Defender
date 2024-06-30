@@ -23,6 +23,7 @@ func has(key: String):
 func get_scene(key: String) -> PackedScene:
 	if not has(key): 
 		_logger.warn("not found key %s, getting null scene" % [key])
+		_logger.info("existed keys: %s" % [_data.keys()])
 		return null
 	return _data[key]
 
@@ -30,6 +31,7 @@ func get_scene(key: String) -> PackedScene:
 func get_node(key: String, unique := true) -> Node:
 	if not has(key): 
 		_logger.warn("not found key %s, getting null node" % [key])
+		_logger.info("existed keys: %s" % [_data.keys()])
 		return null
 	
 	elif not _data_unpacked.has(key):

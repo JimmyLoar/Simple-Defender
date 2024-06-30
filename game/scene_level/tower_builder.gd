@@ -44,6 +44,12 @@ func build_tower(tower_name: String):
 	_logger.info("builded tower %s" % tower.tower_name)
 
 
+func change_tower(old: TowerBase, new: TowerBase):
+	remove_child(old)
+	new.position = old.position
+	add_child(new)
+
+
 func _get_tower(tower_name: String) -> TowerBase:
 	return Database.get_towers_lib().get_node(tower_name)
 
@@ -58,7 +64,10 @@ class HalographicCursor:
 	
 	var select_tower := ""
 	
-	var _last_cell := Vector2.ZERO
+	var _last_cell := Vector2i.ZERO
+	var _velocity := Vector2i() 
+	var _offset_delay := 0.0
+	var _motion := Vector2i.ZERO
 	
 	
 	func set_enable(value: bool, _tower: String = ""):
@@ -71,9 +80,41 @@ class HalographicCursor:
 		top_level = true
 	
 	
-	func _process(delta: float) -> void:
-		if not _enable: return
-		var cell_position : Vector2 = (get_global_mouse_position() / cell_size).floor()
+	func _input(event: InputEvent) -> void:
+		_velocity = Vector2i.ZERO
+		if event.is_action_released("ui_left"):
+			_velocity.x -= 1
+		if event.is_action_released("ui_right"):
+			_velocity.x += 1
+		if event.is_action_released("ui_up"):
+			_velocity.y -= 1
+		if event.is_action_released("ui_down"):
+			_velocity.y += 1
+	
+	
+	func _physics_process(delta: float) -> void:
+		_offset_delay -= delta
+		if _offset_delay > 0.0: 
+			return
+		
+		_velocity = (_velocity + _get_input_direction()).clamp(Vector2i.ONE * -1, Vector2i.ONE)
+		_last_cell = (_last_cell + _velocity).clamp(Vector2.ZERO, Vector2(31, 17))
+		position = _last_cell * cell_size
+		_offset_delay = 0.025 if Input.is_action_pressed("cursor_boost") else 0.25
+		queue_redraw()
+		_velocity = Vector2i.ZERO
+	
+	
+	func _get_input_direction() -> Vector2i:
+		if _velocity != Vector2i.ZERO: return Vector2i.ZERO
+		var dir: Vector2i = Vector2i()
+		dir.x = Input.get_axis("ui_left", "ui_right")
+		dir.y = Input.get_axis("ui_up", "ui_down")
+		return dir
+	
+	
+	func _mouse_follow():
+		var cell_position : Vector2i = (get_global_mouse_position() / cell_size).floor()
 		if _last_cell != cell_position:
 			_last_cell = cell_position
 			position = cell_position * cell_size
@@ -81,7 +122,7 @@ class HalographicCursor:
 	
 	
 	func _draw() -> void:
-		if place_cheker.is_free_place(_last_cell):
+		if can_build():
 			color = Color.GREEN
 		
 		else:
@@ -91,8 +132,12 @@ class HalographicCursor:
 		draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size), color)
  	
 	
+	func can_build() -> bool:
+		return place_cheker.is_free_place(_last_cell)
+	
+	
 	func get_center_position():
-		return position + Vector2.ONE * (cell_size / 2)
+		return position + Vector2.ONE * (cell_size / 2.0)
 	
 	
 	func get_cell_position():

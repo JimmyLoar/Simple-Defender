@@ -5,4 +5,4 @@
 
 [node name="GunTower" instance=ExtResource("1_4k5rs")]
 weapon_packed = ExtResource("2_4q6k8")
-tower_name = "Gun"
+tower_name = "Gun C"
