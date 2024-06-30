@@ -8,7 +8,7 @@ extends Node2D
 @onready var body = %Body
 
 
-@onready var properties : DataProperties
+@onready var properties := DataProperties.new()
 var _logger: Log = GodotLogger.with("%s" % [self])
 
 
@@ -22,9 +22,7 @@ func _update_info():
 
 
 func set_size(value: int):
-	if not is_inside_tree(): 
-		#call_deferred("set_size", value)
-		#breakpoint
+	if not is_inside_tree():
 		return
 	
 	size = clamp(value, 1, 16)
