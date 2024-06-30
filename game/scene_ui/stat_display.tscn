@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://w5eopltwtgwt"]
+
+[ext_resource type="Script" path="res://game/scene_ui/stat_display.gd" id="1_buk61"]
+[ext_resource type="Texture2D" uid="uid://dsnifkhri2u24" path="res://icon.svg" id="2_h3k8t"]
+
+[node name="StatDisplay" type="PanelContainer"]
+offset_right = 128.0
+offset_bottom = 24.0
+script = ExtResource("1_buk61")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(120, 24)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Texture" type="TextureRect" parent="HBox"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_h3k8t")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Damage"
+horizontal_alignment = 3
+
+[node name="SeparatorLabel" type="Control" parent="HBox"]
+layout_mode = 2
+
+[node name="ValueLabel" type="Label" parent="HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "200"
+horizontal_alignment = 2
