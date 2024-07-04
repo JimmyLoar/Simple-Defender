@@ -2,6 +2,7 @@ class_name Level
 extends Node2D
 
 @export var _place_cheker : BusyPlaceChecker
+@export var size := Vector2i(16,9) * 2
 
 var _logger := GodotLogger.with("Level")
 
