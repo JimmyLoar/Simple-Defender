@@ -20,5 +20,4 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="PanelContainer" parent="UI/MarginContainer" instance=ExtResource("3_swa0x")]
-visible = false
 layout_mode = 2

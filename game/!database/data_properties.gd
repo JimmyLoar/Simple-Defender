@@ -32,6 +32,7 @@ func has_origin(key: StringName, origin: StringName) -> bool:
 func get_property(key: StringName):
 	if not has_property(key): return null
 	return _data[key].all
+	
 
 
 func _get_amount_propery(property_key: StringName) -> Variant:

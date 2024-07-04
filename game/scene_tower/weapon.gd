@@ -1,13 +1,15 @@
 class_name TowerWeapon
 extends Node2D
 
-@export var base_damage := 1
-@export var base_recharge := 0.35
+#@export var base_damage := 1
+#@export var base_recharge := 0.35
+
 
 var main_target : Node2D
 var targets: Array[Node2D] = []
 var radar : TowerRadarCompanent
 var recharger := Timer.new()
+var tower : TowerBase
 
 @onready var _logger: Log = GodotLogger.with("%s.%s" % [get_parent(), self.name])
 
@@ -31,7 +33,7 @@ func _physics_process(delta):
 		look_at(main_target.global_position)
 		if not _ready_to_shoot: return 
 		_ready_to_shoot = false
-		recharger.start(base_recharge)
+		recharger.start(1 / tower.get_stats().firerate)
 		_shoot()
 	
 	else:

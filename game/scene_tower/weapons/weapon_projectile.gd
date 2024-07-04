@@ -2,7 +2,7 @@ class_name TWeaponProjectile
 extends TowerWeapon
 
 @export var projectile_packed: PackedScene
-
+#
 @onready var projectile_box = $ProjectileBox
 @onready var gunpoint_marker = $Gunpoints/Marker2D
 
@@ -31,5 +31,5 @@ func _remove_projectile(projectile: Node2D):
 
 func _on_hitted(enemy: Enemy, projectile: Projectile):
 	_logger.debug("projectile %s hitted on %s" % [projectile, enemy])
-	enemy.get_hit_points().take_damage(3)
+	enemy.get_hit_points().take_damage(tower.get_stats().damage)
 
