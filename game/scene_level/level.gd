@@ -15,7 +15,7 @@ func _ready():
 
 
 func get_tile_map() -> TileMap: return %TileMap
-func get_tower_builder() -> Node2D: return %Builder
+func get_tower_builder() -> TowerBuilder: return %Builder
 func get_enemy_keeper() -> EnemiesKeeper: return %EnemiesKeeper
 
 

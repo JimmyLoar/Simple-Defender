@@ -7,6 +7,8 @@ extends Node2D
 var _cursor := HalographicCursor.new()
 var _logger := GodotLogger.with("Builder")
 
+var _builed_towers: Dictionary = {}
+
 
 func _ready() -> void:
 	add_child(_cursor)
@@ -15,16 +17,16 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released('buuild_tower_1') and _cursor.mode != _cursor.Mode.BUILD:
+	if event.is_action_released('buuild_tower_1') and not is_building_mode():
 		_cursor.change_mode(_cursor.Mode.BUILD)
 		_cursor.select_tower = "gun_main"
 		return
 	
-	elif event.is_action_released('buuild_tower_1') and _cursor.mode == _cursor.Mode.BUILD:
+	elif event.is_action_released('buuild_tower_1') and is_building_mode():
 		_cursor.change_mode(_cursor.Mode.NONE)
 	
 	
-	if event.is_action_pressed('mouse_lclick') and _cursor.mode == _cursor.Mode.BUILD:
+	if event.is_action_pressed('ui_select') and is_building_mode():
 		if place_cheker.is_free_place(_cursor.get_cell_position()):
 			build_tower(_cursor.select_tower)
 
@@ -34,7 +36,13 @@ func build_tower(tower_name: String):
 	var tower = _get_tower(tower_name)
 	tower.position = _cursor.get_center_position()
 	add_child(tower)
+	_builed_towers[_cursor.get_cell_position()] = tower
 	_logger.info("builded tower %s" % tower.tower_name)
+
+
+func remove_tower(cell_position: Vector2i):
+	if not _builed_towers.has(cell_position): return
+	_builed_towers.erase(cell_position)
 
 
 func change_tower(old: TowerBase, new: TowerBase):
@@ -43,10 +51,19 @@ func change_tower(old: TowerBase, new: TowerBase):
 	add_child(new)
 
 
+func get_tower_below_cursor():
+	var _pos = _cursor.get_cell_position()
+	if _builed_towers.has(_pos):
+		return _builed_towers[_pos]
+	return null
+
+
+func is_building_mode() -> bool:
+	return _cursor.mode == _cursor.Mode.BUILD
+
+
 func _get_tower(tower_name: String) -> TowerBase:
 	return Database.get_towers_lib().get_node(tower_name)
-
-
 
 
 
