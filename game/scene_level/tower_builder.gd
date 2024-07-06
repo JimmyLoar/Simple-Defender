@@ -86,9 +86,11 @@ class HalographicCursor:
 	var _motion_delay := 0.0
 	var _motion := Vector2i.ZERO
 	var mouse_motion := false
+	var builder: TowerBuilder
 	
 	func _ready() -> void:
 		top_level = true
+		builder = get_parent()
 	
 	
 	func _unhandled_input(event: InputEvent) -> void:
@@ -142,6 +144,14 @@ class HalographicCursor:
 		
 		color.a = 0.75
 		draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size), color)
+		
+		if builder: 
+			var tower: TowerBase = builder.get_tower_below_cursor()
+			if not tower or mode != Mode.NONE: return
+			var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
+			var pos = Vector2.ONE * (cell_size / 2)
+			draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
+			draw_arc(pos, radius, 0, 360, 18, color * Color(1, 1, 1, 0.75), 4)
 	
 	
 	func change_mode(new_mode: Mode):
