@@ -6,3 +6,8 @@
 [node name="GunTower" instance=ExtResource("1_sqqjr")]
 weapon_packed = ExtResource("2_kvkdw")
 tower_name = "Gun A"
+base_stats = {
+"damage": 1.0,
+"firerate": 1.0,
+"vision_range": 2.0
+}
