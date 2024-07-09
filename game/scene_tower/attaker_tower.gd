@@ -14,6 +14,7 @@ func _init_weapon():
 	weapon = weapon_packed.instantiate()
 	add_child(weapon)
 	radar.targets_changed.connect(weapon._find_target)
+	radar.set_vition_range(get_stats().vision_range)
 	weapon.radar = radar
 	weapon.tower = self
 	_logger.debug("loaded weapon %s" % [weapon.name])

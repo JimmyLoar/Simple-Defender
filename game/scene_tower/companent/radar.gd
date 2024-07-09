@@ -35,7 +35,7 @@ func set_target_mode(value: int = -1):
 
 
 func set_vition_range(value: float):
-	vition_range = value
+	vition_range = value + 1
 	var cell_size = ProjectSettings.get_setting("game/level/cell/size", 64)
 	collision.shape.radius = (vition_range - 0.5) * cell_size 
 	_logger.debug("set vision range on %0.2f tiles" % [vition_range])
