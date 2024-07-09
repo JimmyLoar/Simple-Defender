@@ -36,7 +36,8 @@ func _input(event: InputEvent) -> void:
 			_cursor.change_mode(_cursor.Mode.NONE)
 	
 	
-	if event.is_action_pressed('ui_select') and is_building_mode():
+	if (event.is_action_pressed('ui_select') or event.is_action("mouse_lclick"))\
+		and is_building_mode():
 		if place_cheker.is_free_place(_cursor.get_cell_position()):
 			build_tower(_cursor.select_tower)
 			_cursor.queue_redraw()
@@ -177,7 +178,7 @@ class HalographicCursor:
 		var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
 		var pos = Vector2.ONE * (cell_size / 2)
 		draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
-		draw_arc(pos, radius, 0, 360, 18, color * Color(1, 1, 1, 0.75), 4)
+		draw_arc(pos, radius, 0, 360, 45, color * Color(1, 1, 1, 0.75), 4)
 	
 	
 	func change_mode(new_mode: Mode):
