@@ -12,7 +12,8 @@ var structure_size: int = 1
 var color := Color.WHITE
 var place_cheker : BusyPlaceChecker
 
-var select_tower := ""
+var select_tower := "": set = set_tower_name
+var tower_size: int = 1
 
 var _last_cell := Vector2i.ZERO
 var _motion_delay := 0.0
@@ -50,7 +51,7 @@ func _key_motion(delta):
 	if _motion_delay > 0: return
 	
 	_last_cell += Vector2i(motion)
-	_last_cell = _last_cell.clamp(Vector2i.ZERO, level_size - Vector2i.ONE)
+	_last_cell = _last_cell.clamp(Vector2i.ZERO, level_size - Vector2i.ONE * tower_size)
 	_motion_delay = 0.025 if Input.is_action_pressed("cursor_boost") else 0.15
 	position = _last_cell * cell_size
 	queue_redraw()
@@ -75,20 +76,23 @@ func _draw() -> void:
 		color = Color.RED
 	
 	color.a = 0.75
-	draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size), color)
 	
+	draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size * tower_size), color)
 	if builder: _draw_range()
 
 
 func _draw_range():
 	var tower: TowerBase = builder.get_tower_below_cursor()
+	var pos = Vector2.ONE * tower_size * cell_size / 2.0
 	if not tower:
 		if select_tower == "": return 
 		tower = Database.get_towers_lib().get_node(select_tower)
 		if not tower: return
 	
-	var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
-	var pos = Vector2.ONE * (cell_size / 2.0)
+	elif tower and mode == Mode.NONE:
+		pos += tower.position - get_center_position()
+	
+	var radius = (tower.get_stats().vision_range + 0.5) * cell_size
 	draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
 	draw_arc(pos, radius, 0, 360, 45, color * Color(1, 1, 1, 0.75), 4)
 
@@ -99,6 +103,17 @@ func change_mode(new_mode: Mode):
 	get_parent()._logger.info("change mode on %s" % [Mode.keys()[mode]])
 
 
+func set_tower_name(_name: String):
+	select_tower = _name
+	var tower: TowerBase = Database.get_towers_lib().get_node(select_tower)
+	if not tower: 
+		tower_size = 1
+		return
+	
+	tower_size = tower.size
+	queue_redraw()
+
+
 func set_level_size(value):
 	level_size = value
 	_last_cell = level_size / 2
@@ -106,12 +121,21 @@ func set_level_size(value):
 
 
 func can_build() -> bool:
-	return place_cheker.is_free_place(_last_cell)
+	return place_cheker.is_free_array(get_cells_position_list())
 
 
 func get_center_position():
-	return position + Vector2.ONE * (cell_size / 2.0)
+	return position + (Vector2.ONE * tower_size * cell_size) / 2.0
 
 
 func get_cell_position():
 	return _last_cell
+
+
+func get_cells_position_list() -> Array:
+	var array: Array = [get_cell_position()]
+	for x in tower_size:
+		for y in tower_size:
+			if x == 0 and y == 0: continue
+			array.append(array[0] + Vector2i(x, y))
+	return array

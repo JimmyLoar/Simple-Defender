@@ -19,8 +19,13 @@ var _logger: Log = GodotLogger.with("%s" % [self])
 
 
 func _init() -> void:
-	if not ready.is_connected(_update_info):
-		ready.connect(_update_info)
+	if not ready.is_connected(update):
+		ready.connect(update)
+
+
+func update() -> void:
+	_update_info()
+	_update_size()
 
 
 func _update_info():
@@ -28,13 +33,15 @@ func _update_info():
 	_logger.debug("tower has %s and %s" % [$Radar, $Body])
 
 
-func set_size(value: int):
-	if not is_inside_tree():
-		return
-	
-	size = clamp(value, 1, 16)
+func _update_size():
 	$Body.set_size(size)
 	_logger.debug("set size on %d (%s tiles)" % [size, size * size])
+
+
+func set_size(value: int):
+	size = clamp(value, 1, 16)
+	if is_inside_tree():
+		_update_size()
 
 
 func get_stats() -> Dictionary:
@@ -45,3 +52,4 @@ func get_stats() -> Dictionary:
 
 func _get_stats() -> Dictionary:
 	return {}
+

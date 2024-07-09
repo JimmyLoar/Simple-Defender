@@ -28,11 +28,11 @@ func _input(event: InputEvent) -> void:
 	if key != "":
 		if not is_building_mode():
 			_cursor.change_mode(_cursor.Mode.BUILD)
-			_cursor.select_tower = BUILD_PRESSED[key]
+			_cursor.set_tower_name(BUILD_PRESSED[key])
 			return
 		
 		elif is_building_mode():
-			_cursor.select_tower = ""
+			_cursor.set_tower_name("")
 			_cursor.change_mode(_cursor.Mode.NONE)
 	
 	
@@ -56,11 +56,13 @@ func switch_tower(tower_name: String, cell_position: Vector2):
 
 
 func build_tower(tower_name: String):
-	place_cheker.add_busy_place(_cursor.get_cell_position())
+	var used_cells = _cursor.get_cells_position_list()
+	place_cheker.add_busy_array(used_cells)
 	var tower = _get_tower(tower_name)
 	tower.position = _cursor.get_center_position()
 	add_child(tower)
-	_builed_towers[_cursor.get_cell_position()] = tower
+	for pos in used_cells:
+		_builed_towers[pos] = tower
 	_logger.info("builded tower %s for %s" % [tower.tower_name, _cursor.get_cell_position()])
 
 
