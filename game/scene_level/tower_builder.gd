@@ -1,6 +1,7 @@
 class_name TowerBuilder
 extends Node2D
 
+
 @export var place_cheker: BusyPlaceChecker
 
 
@@ -16,19 +17,38 @@ func _ready() -> void:
 	_cursor.set_level_size(get_parent().get("size"))
 
 
+const BUILD_PRESSED = {
+	"buuild_tower_1" = 'gun_main',
+	"buuild_tower_2" = 'gun_a',
+	"buuild_tower_3" = 'gun_b',
+	"buuild_tower_4" = 'gun_c',
+}
 func _input(event: InputEvent) -> void:
-	if event.is_action_released('buuild_tower_1') and not is_building_mode():
-		_cursor.change_mode(_cursor.Mode.BUILD)
-		_cursor.select_tower = "gun_main"
-		return
-	
-	elif event.is_action_released('buuild_tower_1') and is_building_mode():
-		_cursor.change_mode(_cursor.Mode.NONE)
+	var key = _check_on_build_pressed(event)
+	if key != "":
+		if not is_building_mode():
+			_cursor.change_mode(_cursor.Mode.BUILD)
+			_cursor.select_tower = BUILD_PRESSED[key]
+			return
+		
+		elif is_building_mode():
+			_cursor.select_tower = ""
+			_cursor.change_mode(_cursor.Mode.NONE)
 	
 	
 	if event.is_action_pressed('ui_select') and is_building_mode():
 		if place_cheker.is_free_place(_cursor.get_cell_position()):
 			build_tower(_cursor.select_tower)
+			_cursor.queue_redraw()
+
+
+func _check_on_build_pressed(event):
+	for key in BUILD_PRESSED.keys():
+		if event.is_action_released(key):
+			return key
+	
+	return ""
+
 
 
 func build_tower(tower_name: String):
@@ -66,7 +86,6 @@ func _get_tower(tower_name: String) -> TowerBase:
 	return Database.get_towers_lib().get_node(tower_name)
 
 
-
 class HalographicCursor:
 	extends Node2D
 	
@@ -86,11 +105,11 @@ class HalographicCursor:
 	var _motion_delay := 0.0
 	var _motion := Vector2i.ZERO
 	var mouse_motion := false
-	var builder: TowerBuilder
+	var tower: TowerBuilder
 	
 	func _ready() -> void:
 		top_level = true
-		builder = get_parent()
+		tower = get_parent()
 	
 	
 	func _unhandled_input(event: InputEvent) -> void:
@@ -145,13 +164,20 @@ class HalographicCursor:
 		color.a = 0.75
 		draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size), color)
 		
-		if builder: 
-			var tower: TowerBase = builder.get_tower_below_cursor()
-			if not tower or mode != Mode.NONE: return
-			var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
-			var pos = Vector2.ONE * (cell_size / 2)
-			draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
-			draw_arc(pos, radius, 0, 360, 18, color * Color(1, 1, 1, 0.75), 4)
+		if tower: _draw_range()
+	
+	
+	func _draw_range():
+		var tower: TowerBase = tower.get_tower_below_cursor()
+		if not tower:
+			if select_tower == "": return 
+			tower = Database.get_towers_lib().get_node(select_tower)
+			if not tower: return
+		
+		var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
+		var pos = Vector2.ONE * (cell_size / 2)
+		draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
+		draw_arc(pos, radius, 0, 360, 18, color * Color(1, 1, 1, 0.75), 4)
 	
 	
 	func change_mode(new_mode: Mode):
