@@ -20,3 +20,6 @@ func _enter_tree():
 	set_size(parent.size)
 	add_child(collition)
 
+
+func take_damage(damage: int):
+	_logger.info("taked damage %d" % [damage])

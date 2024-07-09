@@ -19,10 +19,6 @@ func generate_wave(wave: int = 0):
 	get_child(0).spawn_any(enemy_count)
 
 
-func get_packed_enemy(enemy_name: StringName):
-	pass
-
-
 func _ready():
 	_connection_paths()
 

@@ -23,7 +23,6 @@ func _ready():
 	enemy_keeper.path_cleared.connect(waves.start_wave)
 	
 	_logger.info("Ready! Game Strted!", {}, Color.GREEN)
-	GodotLogger.info("")
 	#start game
 	waves.call_deferred("start_wave")
 

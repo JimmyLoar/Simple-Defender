@@ -28,7 +28,7 @@ func _target_chenged(_radar: TowerRadarCompanent):
 	main_target = targets.front()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if main_target:
 		look_at(main_target.global_position)
 		if not _ready_to_shoot: return 

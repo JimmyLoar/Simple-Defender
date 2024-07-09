@@ -36,7 +36,7 @@ func set_font_size(value: int):
 
 
 func _update_font_size():
-	$HBox.set('theme_override_constants/separation', _font_size / 4)
+	$HBox.set('theme_override_constants/separation', _font_size / 4.0)
 	name_label.set('theme_override_font_sizes/font_size', _font_size)
 	value_label.set('theme_override_font_sizes/font_size', _font_size)
 	texture.set_deferred("custom_minimum_size", Vector2.ONE * (1.5 * _font_size))

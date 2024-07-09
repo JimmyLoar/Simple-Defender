@@ -37,7 +37,6 @@ func get_property(key: StringName):
 
 func _get_amount_propery(property_key: StringName) -> Variant:
 	var data: Dictionary = _data[property_key]
-	var type := typeof(data.base)
 	var values = data.base
 	for origin in data.keys():
 		var value = data[origin]

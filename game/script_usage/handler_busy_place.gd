@@ -22,11 +22,11 @@ func add_busy_array(array) -> bool:
 	return true
 
 
-func remove_busy_place(place: Vector2):
+func remove_busy_place(_place: Vector2):
 	pass
 
 
-func remove_busy_array(array):
+func remove_busy_array(_array):
 	pass
 
 

@@ -58,7 +58,7 @@ func build_tower(tower_name: String):
 	tower.position = _cursor.get_center_position()
 	add_child(tower)
 	_builed_towers[_cursor.get_cell_position()] = tower
-	_logger.info("builded tower %s" % tower.tower_name)
+	_logger.info("builded tower %s for %s" % [tower.tower_name, _cursor.get_cell_position()])
 
 
 func remove_tower(cell_position: Vector2i):
@@ -104,13 +104,12 @@ class HalographicCursor:
 	
 	var _last_cell := Vector2i.ZERO
 	var _motion_delay := 0.0
-	var _motion := Vector2i.ZERO
 	var mouse_motion := false
-	var tower: TowerBuilder
+	var builder: TowerBuilder
 	
 	func _ready() -> void:
 		top_level = true
-		tower = get_parent()
+		builder = get_parent()
 	
 	
 	func _unhandled_input(event: InputEvent) -> void:
@@ -165,18 +164,18 @@ class HalographicCursor:
 		color.a = 0.75
 		draw_rect(Rect2(Vector2.ZERO, Vector2.ONE * cell_size), color)
 		
-		if tower: _draw_range()
+		if builder: _draw_range()
 	
 	
 	func _draw_range():
-		var tower: TowerBase = tower.get_tower_below_cursor()
+		var tower: TowerBase = builder.get_tower_below_cursor()
 		if not tower:
 			if select_tower == "": return 
 			tower = Database.get_towers_lib().get_node(select_tower)
 			if not tower: return
 		
 		var radius = (tower.get_stats().vision_range + 0.5) * cell_size 
-		var pos = Vector2.ONE * (cell_size / 2)
+		var pos = Vector2.ONE * (cell_size / 2.0)
 		draw_circle(pos, radius, color * Color(1, 1, 1, 0.4))
 		draw_arc(pos, radius, 0, 360, 45, color * Color(1, 1, 1, 0.75), 4)
 	

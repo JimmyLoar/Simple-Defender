@@ -28,8 +28,8 @@ func set_target_mode(value: int = -1):
 	target_mode = value
 	collision.disabled = target_mode < 0
 	match target_mode:
-		0: collision_mask = 20.0
-		1: collision_mask = 10.0
+		0: collision_mask = 20
+		1: collision_mask = 10
 	
 	_logger.debug("set target mode %s, mask %d" % [["None", "Enemies", "Allies"][target_mode + 1], collision_mask])
 
@@ -59,7 +59,7 @@ func sort_targets():
 	pass
 
 
-func get_targets(count := 1) -> Array[Node2D]:
+func get_targets(_count := 1) -> Array[Node2D]:
 	return []
 
 
