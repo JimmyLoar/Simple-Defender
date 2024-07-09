@@ -1,19 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfxomskymqv1a"]
+[gd_scene load_steps=7 format=3 uid="uid://dfxomskymqv1a"]
 
 [ext_resource type="Script" path="res://game/scene_level/level.gd" id="1_mc6dh"]
-[ext_resource type="Script" path="res://game/script_usage/handler_busy_place.gd" id="2_c3gkx"]
 [ext_resource type="TileSet" uid="uid://dncj8xhcrtj37" path="res://game/scene_level/tileset/64.tres" id="2_iwvoq"]
 [ext_resource type="Script" path="res://game/scene_level/level_tilemap.gd" id="3_nn2nk"]
 [ext_resource type="Script" path="res://game/scene_level/enemies_keeper.gd" id="4_bh3p7"]
+[ext_resource type="Script" path="res://game/scene_level/tower_builder.gd" id="4_q6f0v"]
 [ext_resource type="Script" path="res://game/scene_enemy/enemies_path.gd" id="5_322nf"]
-[ext_resource type="Script" path="res://game/scene_level/tower_builder.gd" id="5_mexta"]
-
-[sub_resource type="Resource" id="Resource_ffgnj"]
-script = ExtResource("2_c3gkx")
 
 [node name="LevelScene" type="Node2D"]
 script = ExtResource("1_mc6dh")
-_place_cheker = SubResource("Resource_ffgnj")
 
 [node name="TileMap" type="TileMap" parent="."]
 unique_name_in_owner = true
@@ -29,8 +24,7 @@ script = ExtResource("3_nn2nk")
 
 [node name="Builder" type="Node2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("5_mexta")
-place_cheker = SubResource("Resource_ffgnj")
+script = ExtResource("4_q6f0v")
 
 [node name="EnemiesKeeper" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -8,9 +8,12 @@ var _logger := GodotLogger.with("Level")
 
 
 func _ready():
+	_place_cheker = BusyPlaceChecker.new()
 	_place_cheker.add_busy_array(get_tile_map().get_used_cells(0))
 	_place_cheker.add_busy_array(get_tile_map().get_used_cells(1))
 	_place_cheker.add_busy_array(get_tile_map().get_used_cells(2))
+	get_tower_builder().place_cheker = _place_cheker
+	get_tower_builder().init_cursor()
 	_logger.info("ready!")
 
 
