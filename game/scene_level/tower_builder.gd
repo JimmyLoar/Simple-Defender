@@ -51,6 +51,7 @@ func _check_on_build_pressed(event):
 
 
 func build_tower(tower_name: String):
+	if not _cursor.can_build(): return
 	var tower = _get_new_tower_from_database(tower_name)
 	if not tower: return
 	add_tower(tower, _cursor.get_cell_position(), _cursor.get_center_offset())
@@ -70,7 +71,7 @@ func add_tower(tower: TowerBase, tower_pos: Vector2i, position_offset: Vector2 =
 	add_child(tower)
 	for pos in used_cells:
 		_builed_towers[pos] = tower
-	_logger.info("builded tower %s for %s | %s" % [tower.tower_name, _cursor.get_cell_position(), tower.position])
+	_logger.debug("builded tower %s for %s | %s" % [tower.tower_name, _cursor.get_cell_position(), tower.position])
 
 
 func remove_tower(cell_position: Vector2i):

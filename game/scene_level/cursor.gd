@@ -101,7 +101,7 @@ func _draw_range():
 func change_mode(new_mode: Mode):
 	mode = new_mode
 	queue_redraw()
-	get_parent()._logger.info("change mode on %s" % [Mode.keys()[mode]])
+	#get_parent()._logger.info("change mode on %s" % [Mode.keys()[mode]])
 
 
 func set_tower_name(_name: String):
@@ -122,7 +122,7 @@ func set_level_size(value):
 
 
 func can_build() -> bool:
-	return place_cheker.is_free_array(get_cells_position_list())
+	return place_cheker.is_free_array(get_cells_position_list(get_cell_position()))
 
 
 func get_center_offset() -> Vector2:
