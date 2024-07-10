@@ -2,8 +2,7 @@ class_name TowerBuilder
 extends Node2D
 
 
-@export var place_cheker: BusyPlaceChecker
-
+var place_cheker: BusyPlaceChecker
 
 var _cursor := HalographicCursor.new()
 var _logger := GodotLogger.with("Builder")
@@ -51,30 +50,51 @@ func _check_on_build_pressed(event):
 	return ""
 
 
-func switch_tower(tower_name: String, cell_position: Vector2):
-	pass
-
-
 func build_tower(tower_name: String):
-	var used_cells = _cursor.get_cells_position_list()
+	var tower = _get_new_tower_from_database(tower_name)
+	if not tower: return
+	add_tower(tower, _cursor.get_cell_position(), _cursor.get_center_offset())
+
+
+func switch_tower(new_tower_name: String, old_cell_position: Vector2i):
+	var new_tower: TowerBase = _get_new_tower_from_database(new_tower_name)
+	if not new_tower: return
+	remove_tower(old_cell_position)
+	add_tower(new_tower, old_cell_position, get_center_offset(new_tower.size))
+
+
+func add_tower(tower: TowerBase, tower_pos: Vector2i, position_offset: Vector2 = Vector2.ZERO):
+	var used_cells = _cursor.get_cells_position_list(tower_pos)
 	place_cheker.add_busy_array(used_cells)
-	var tower = _get_tower(tower_name)
-	tower.position = _cursor.get_center_position()
+	tower.position = Vector2(tower_pos * _cursor.cell_size) + position_offset
 	add_child(tower)
 	for pos in used_cells:
 		_builed_towers[pos] = tower
-	_logger.info("builded tower %s for %s" % [tower.tower_name, _cursor.get_cell_position()])
+	_logger.info("builded tower %s for %s | %s" % [tower.tower_name, _cursor.get_cell_position(), tower.position])
 
 
 func remove_tower(cell_position: Vector2i):
 	if not _builed_towers.has(cell_position): return
-	_builed_towers.erase(cell_position)
+	var tower: TowerBase = _builed_towers[cell_position]
+	var used_cells = _cursor.get_cells_position_list(cell_position)
+	tower.queue_free()
+	for pos in used_cells:
+		_builed_towers.erase(pos)
 
 
 func change_tower(old: TowerBase, new: TowerBase):
 	remove_child(old)
 	new.position = old.position
 	add_child(new)
+
+
+func get_center_offset(size: int) -> Vector2:
+	return (Vector2.ONE * size * _cursor.cell_size) / 2.0
+
+
+func get_center_position(cell_position: Vector2i, size: int) -> Vector2:
+	return Vector2(cell_position * _cursor.cell_size) + get_center_offset(size)
+
 
 
 func get_tower_below_cursor():
@@ -88,7 +108,7 @@ func is_building_mode() -> bool:
 	return _cursor.mode == _cursor.Mode.BUILD
 
 
-func _get_tower(tower_name: String) -> TowerBase:
+func _get_new_tower_from_database(tower_name: String) -> TowerBase:
 	return Database.get_towers_lib().get_node(tower_name)
 
 

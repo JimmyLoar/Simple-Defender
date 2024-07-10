@@ -22,6 +22,7 @@ var builder: TowerBuilder
 
 
 func _ready() -> void:
+	name = "Cursor"
 	top_level = true
 	builder = get_parent()
 
@@ -124,16 +125,20 @@ func can_build() -> bool:
 	return place_cheker.is_free_array(get_cells_position_list())
 
 
+func get_center_offset() -> Vector2:
+	return (Vector2.ONE * tower_size * cell_size) / 2.0
+
+
 func get_center_position():
-	return position + (Vector2.ONE * tower_size * cell_size) / 2.0
+	return position + get_center_offset()
 
 
 func get_cell_position():
 	return _last_cell
 
 
-func get_cells_position_list() -> Array:
-	var array: Array = [get_cell_position()]
+func get_cells_position_list(start_pos: Vector2i = get_cell_position()) -> Array:
+	var array: Array = [start_pos]
 	for x in tower_size:
 		for y in tower_size:
 			if x == 0 and y == 0: continue

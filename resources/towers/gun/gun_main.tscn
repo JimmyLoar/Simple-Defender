@@ -1,7 +1,41 @@
-[gd_scene load_steps=3 format=3 uid="uid://ds3sgevwk2kc3"]
+[gd_scene load_steps=8 format=3 uid="uid://ds3sgevwk2kc3"]
 
 [ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="1_g5ac0"]
 [ext_resource type="PackedScene" uid="uid://64h3lvpekpcf" path="res://game/scene_tower/weapons/weapon_projectile.tscn" id="2_th01w"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/shape_texture_2d.gd" id="3_qyokb"]
+[ext_resource type="Script" path="res://addons/shape_texture_2d/drawable_polygon.gd" id="4_407wt"]
+
+[sub_resource type="Gradient" id="Gradient_3beox"]
+metadata/_snap_enabled = true
+
+[sub_resource type="Resource" id="Resource_a4y22"]
+script = ExtResource("4_407wt")
+points = 4
+is_star = false
+star_inset = 0.5
+
+[sub_resource type="Texture2D" id="Texture2D_j65ms"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("3_qyokb")
+size = Vector2i(104, 104)
+shape = SubResource("Resource_a4y22")
+fill_type = 0
+fill_color = Color(1, 1, 0.584314, 1)
+fill_gradient = SubResource("Gradient_3beox")
+fill_from = Vector2(0, -0.03)
+fill_to = Vector2(0.245, 0)
+fill_repeat = "pad"
+stroke_type = 0
+stroke_width = 3.0
+stroke_color = Color(1, 0, 0, 1)
+stroke_from = Vector2(0, 0)
+stroke_to = Vector2(1, 0)
+stroke_repeat = "pad"
+stroke_joint = "round"
+offset = Vector2(0, 0)
+rotation = 0.0
+scale = Vector2(1, 1)
 
 [node name="GunTower" instance=ExtResource("1_g5ac0")]
 weapon_packed = ExtResource("2_th01w")
@@ -11,3 +45,6 @@ base_stats = {
 "firerate": 1.0,
 "vision_range": 3.0
 }
+
+[node name="MainSprite" parent="Textures" index="0"]
+texture = SubResource("Texture2D_j65ms")
