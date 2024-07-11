@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn5lfimrep7dx"]
+[gd_scene load_steps=4 format=3 uid="uid://cn5lfimrep7dx"]
 
 [ext_resource type="Script" path="res://game/scene_defence/defence.gd" id="1_pro6k"]
 [ext_resource type="PackedScene" uid="uid://dxc6iu2h8ywfh" path="res://game/scene_ui/tower_information_panel.tscn" id="3_swa0x"]
+[ext_resource type="PackedScene" uid="uid://cta6r6qq862c0" path="res://game/scene_ui/upgrade_tree_display.tscn" id="3_ujtqv"]
 
 [node name="DefenceScene" type="Node2D"]
 script = ExtResource("1_pro6k")
@@ -11,11 +12,32 @@ script = ExtResource("1_pro6k")
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
 clip_contents = true
 custom_minimum_size = Vector2(600, 0)
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="TowerInformation" parent="UI/MarginContainer" instance=ExtResource("3_swa0x")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TowerInformation" parent="UI/MarginContainer/HBoxContainer" instance=ExtResource("3_swa0x")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="UpgradeTreePanel" parent="UI/MarginContainer/HBoxContainer" instance=ExtResource("3_ujtqv")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="UI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
