@@ -11,7 +11,7 @@ var waves := WaveLoops.new()
 var _logger := GodotLogger.with("DefenceScene")
 
 
-@onready var tower_information_panel: PanelContainer = $UI/MarginContainer/TowerInformation
+@onready var tower_information_panel: PanelContainer = %TowerInformation
 
 
 func _ready():
