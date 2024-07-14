@@ -1,34 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cta6r6qq862c0"]
-
-[ext_resource type="Script" path="res://game/scene_ui/upgrade_tree_display.gd" id="1_wyxty"]
-[ext_resource type="Resource" uid="uid://cgi2skfrjlm3j" path="res://resources/updrades/gun/damage_1.tres" id="2_2w5h6"]
-[ext_resource type="Resource" uid="uid://bsog8gf81uhd2" path="res://resources/updrades/gun/firerate_1.tres" id="3_q3cej"]
-[ext_resource type="Script" path="res://game/scripte_upgrade/upgrade_tree.gd" id="4_apb7m"]
-[ext_resource type="Resource" uid="uid://b30plr7bkeavi" path="res://resources/updrades/gun/range_1.tres" id="4_tmfv8"]
-
-[sub_resource type="Resource" id="Resource_uktx6"]
-script = ExtResource("4_apb7m")
-data = Array[Resource("res://game/scripte_upgrade/upgrade_data.gd")]([ExtResource("2_2w5h6"), ExtResource("3_q3cej"), ExtResource("4_tmfv8")])
-_dependencies = {
-"Damage +": "",
-"Firerate +": "",
-"Range +": ""
-}
-_base_price = {
-"Damage +": 0,
-"Firerate +": 1,
-"Range +": 2
-}
-_index_dictionary = {
-"Damage +": 0,
-"Firerate +": 1,
-"Range +": 2
-}
-_dependencies = {
-"Damage +": "",
-"Firerate +": "",
-"Range +": ""
-}
+[gd_scene format=3 uid="uid://pryakol16w4b"]
 
 [node name="UpgradeTreePanel" type="PanelContainer"]
 anchors_preset = 15
@@ -36,5 +6,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_wyxty")
-tree = SubResource("Resource_uktx6")

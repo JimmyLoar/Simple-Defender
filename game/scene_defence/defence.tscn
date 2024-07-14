@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/scene_defence/defence.gd" id="1_pro6k"]
 [ext_resource type="PackedScene" uid="uid://dxc6iu2h8ywfh" path="res://game/scene_ui/tower_information_panel.tscn" id="3_swa0x"]
-[ext_resource type="PackedScene" uid="uid://cta6r6qq862c0" path="res://game/scene_ui/upgrade_tree_display.tscn" id="3_ujtqv"]
+[ext_resource type="PackedScene" uid="uid://pryakol16w4b" path="res://game/scene_ui/upgrade_tree_display.tscn" id="3_ujtqv"]
 
 [node name="DefenceScene" type="Node2D"]
 script = ExtResource("1_pro6k")

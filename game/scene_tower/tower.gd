@@ -10,6 +10,8 @@ extends Node2D
 }:
 	get = get_stats
 
+@export var upgrade_tree: PackedScene
+
 @onready var radar = %Radar
 @onready var body = %Body
 

@@ -6,7 +6,7 @@ signal finished(enemy: Enemy)
 @export var enemy_name := "Normal"
 @export var move_speed := 64
 
-@onready var data: DataLib = Database.get_enemies_lib()
+@onready var data: DataLib = Database.get_enemy_lib()
 @onready var _logger := GodotLogger.with("%s" % self)
 
 var is_death = false

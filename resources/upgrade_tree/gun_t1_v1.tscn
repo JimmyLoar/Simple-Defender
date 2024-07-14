@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://brxfamxwwque2"]
+
+[ext_resource type="PackedScene" uid="uid://b5l1d65hcge4j" path="res://game/scene_upgrade_tree/tree_display.tscn" id="1_tms7y"]
+[ext_resource type="PackedScene" uid="uid://jf1kxtqrntej" path="res://game/scene_upgrade_tree/tree_node.tscn" id="2_lvbpq"]
+
+[node name="TreeDisplay" instance=ExtResource("1_tms7y")]
+
+[node name="Damage" parent="NodesBox" index="1" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+position = Vector2(-126, -150)
+dependence = [NodePath("../Root")]
+
+[node name="Range" parent="NodesBox" index="2" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+position = Vector2(128, -152)
+dependence = [NodePath("../Root")]
+
+[node name="Firerate" parent="NodesBox" index="3" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+position = Vector2(0, -152)
+dependence = [NodePath("../Root")]
+prise = {}
+
+[node name="Damage2" parent="NodesBox" index="4" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+position = Vector2(-126, -302)
+dependence = [NodePath("../Damage")]
+prise = {}
+
+[node name="Focus" parent="NodesBox" index="5" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+position = Vector2(64, -302)
+dependence = [NodePath("../Firerate"), NodePath("../Range")]
+prise = {}

@@ -1,5 +1,8 @@
 extends PanelContainer
 
+signal sell_pressed
+signal upgrade_pressed
+
 
 @export var data_name := "gun_main"
 

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://jf1kxtqrntej"]
+
+[ext_resource type="Script" path="res://game/scene_upgrade_tree/tree_node.gd" id="1_61joi"]
+[ext_resource type="Script" path="res://game/scene_upgrade_tree/tree_node_ui.tres.gd" id="2_x0wvk"]
+[ext_resource type="Texture2D" uid="uid://dsnifkhri2u24" path="res://icon.svg" id="3_w0dga"]
+[ext_resource type="Script" path="res://game/scene_upgrade_tree/tree_node_connection.tres.gd" id="4_c6h26"]
+
+[node name="TreeNode" type="Marker2D"]
+script = ExtResource("1_61joi")
+
+[node name="UI" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_x0wvk")
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("3_w0dga")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Extends" type="Control" parent="UI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Extends"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = -55.0
+offset_right = 120.0
+offset_bottom = -5.0
+grow_horizontal = 2
+size_flags_vertical = 8
+text = "TreeNode"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="UI"]
+layout_mode = 2
+flat = true
+
+[node name="ConnectNodes" type="Node2D" parent="."]
+script = ExtResource("4_c6h26")
+
+[node name="LEFT" type="Marker2D" parent="ConnectNodes"]
+position = Vector2(-44, 0)
+
+[node name="RIGHT" type="Marker2D" parent="ConnectNodes"]
+position = Vector2(44, 0)
+
+[node name="DOWN" type="Marker2D" parent="ConnectNodes"]
+position = Vector2(0, 44)
+
+[node name="UP" type="Marker2D" parent="ConnectNodes"]
+position = Vector2(0, -44)
