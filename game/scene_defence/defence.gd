@@ -38,3 +38,5 @@ func install_level(_level_packed: PackedScene = level_packed):
 	move_child(level, 0)
 	tower_information_panel.towers_builder = level.get_tower_builder()
 
+
+

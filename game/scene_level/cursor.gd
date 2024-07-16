@@ -33,22 +33,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	elif Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down"):
 		mouse_motion = false
+		_key_motion()
 
 
 func _physics_process(delta: float) -> void:
 	if mouse_motion:
 		_mouse_follow()
 		return
-	_key_motion(delta)
+	_motion_delay -= delta
 
 
-func _key_motion(delta):
+func _key_motion():
 	var motion := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if not motion:
 		_motion_delay = 0.05
 		return
 	
-	_motion_delay -= delta
 	if _motion_delay > 0: return
 	
 	_last_cell += Vector2i(motion)

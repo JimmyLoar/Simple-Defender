@@ -22,6 +22,7 @@ const BUILD_PRESSED = {
 	"buuild_tower_3" = 'gun_b',
 	"buuild_tower_4" = 'gun_c',
 }
+
 func _input(event: InputEvent) -> void:
 	var key = _check_on_build_pressed(event)
 	if key != "":

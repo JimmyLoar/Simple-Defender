@@ -49,3 +49,7 @@ func update(tower: TowerBase):
 
 func update_name(new_name: String):
 	%TitleLabel.text = new_name
+
+
+func _on_button_pressed() -> void:
+	upgrade_pressed.emit()

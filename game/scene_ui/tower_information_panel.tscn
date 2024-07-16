@@ -51,9 +51,10 @@ display_mode = 1
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 24
-disabled = true
-text = "Upgrade Tree"
+text = "Upgrade Tree [G]"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
 mouse_filter = 2
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
