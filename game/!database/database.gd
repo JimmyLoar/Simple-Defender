@@ -18,6 +18,33 @@ var _data := {
 	upgrade_tree = DataLib.new({
 		&"gun_t1_v1": preload('res://resources/upgrade_tree/gun_t1_v1.tscn'),
 	}),
+	
+	skills = DataLib.new({
+		 &"none" : {
+			"name": "NoneSkill",
+			"icon": preload('res://icon.svg'),
+			#"modulate": Color.WHITE,
+			"discription": "",
+		},
+		 &"tower_gun" : {
+			"name": "Tower Gun",
+		},
+		&"damage_l1" : {
+			"name": "Damage",
+		},
+		&"damage_l2" : {
+			"name": "Damage +",
+		},
+		&"firerate" : {
+			"name": "Firerate",
+		},
+		&"range" : {
+			"name": "Range",
+		},
+		&"focus" : {
+			"name": "Focus",
+		},
+	}),
 }
 
 
@@ -39,9 +66,12 @@ func get_upgrade_lib() -> DataLib: return _data.upgrade_tree
 func get_upgrade_keys() -> Array: 
 	return get_upgrade_lib().get_all_data().keys()
 
+func get_skill_lib() -> DataLib: return _data.skills
+func get_skill_keys() -> Array: 
+	return get_skill_lib().get_all_data().keys()
+
 
 func _ready() -> void:
 	_logger.info("database has libs '%s'" % _data)
-
 
 

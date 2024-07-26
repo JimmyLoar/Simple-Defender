@@ -1,5 +1,5 @@
 @tool
-class_name SkillTree
+class_name TreeDisplay
 extends Node2D
 
 @onready var node_box: Node2D = $NodesBox
@@ -51,5 +51,11 @@ func _update_connection(from_node: TreeNode, to_node: TreeNode):
 	var end_index := line.points.size() - 1
 	var end_pos = to_node.get_up_marker().global_position - line.global_position
 	line.points[end_index] = end_pos
-	
+
+
+func set_unlock_skills(list: Array):
+	pass
+
+func get_unlock_skills() -> Array:
+	return []
 

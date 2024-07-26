@@ -4,6 +4,8 @@ extends Resource
 
 @export var _data := Dictionary()
 @export var _data_unpacked := Dictionary()
+
+
 var _logger:= GodotLogger.with("DataLib")
 
 
@@ -16,21 +18,24 @@ func add_data(key, value):
 	_data[key] = value
 
 
-func has(key: String):
-	return _data.has(key)
+func has(key: String, is_packed_scene := false) -> bool:
+	var _has = _data.has(key)
+	if is_packed_scene and _has:
+		return _has && _data[key] is PackedScene
+	return _has
 
 
-func get_scene(key: String) -> PackedScene:
+func get_data(key: String) -> Variant:
 	if not has(key): 
-		_logger.warn("not found key '%s', getting null scene" % [key])
+		_logger.warn("not found data with key '%s', getting 'null'" % [key])
 		_logger.info("existed keys: %s" % [_data.keys()])
 		return null
 	return _data[key]
 
 
 func get_node(key: String, unique := true) -> Node:
-	if not has(key): 
-		_logger.warn("not found key '%s', getting null node" % [key])
+	if not has(key, true): 
+		_logger.warn("not found packed scene with key '%s', getting 'null' node" % [key])
 		_logger.info("existed keys: %s" % [_data.keys()])
 		return null
 	

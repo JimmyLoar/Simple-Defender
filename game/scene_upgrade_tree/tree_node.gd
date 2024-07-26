@@ -5,15 +5,6 @@ extends Marker2D
 signal unloked(node: TreeNode)
 
 
-
-@export var skill_name := "Name"
-@export var icon: Texture = preload('res://icon.svg'):
-	set(value):
-		icon = value
-		if not is_inside_tree(): return
-		ui.set_icon(icon)
-
-
 @export var dependence: Array[TreeNode] = []
 @export var prise = {
 	"money":  0,
@@ -29,6 +20,8 @@ signal unloked(node: TreeNode)
 @export var _ui_bottom: TreeNode
 
 
+var base_skill: StringName = &"none"
+
 var _unlocked := false
 
 
@@ -36,11 +29,18 @@ var _unlocked := false
 @onready var connection_markers: Node2D = $ConnectNodes
 @onready var button: Button = $UI/Button
 
+@onready var skill_data : Dictionary 
+
 
 func _ready() -> void:
+	var lib : DataLib = Database.get_skill_lib()
+	skill_data = lib.get_data(base_skill)
+	skill_data.merge(lib.get_data(&"none"))
+	
 	if Engine.is_editor_hint():
 		connection_markers.set_connect_position(ui.size)
 		ui.set_title(self.name)
+		ui.set_icon(skill_data.icon)
 	
 	else:
 		call_deferred("_update_focus_button")
@@ -49,7 +49,8 @@ func _ready() -> void:
 
 
 func update():
-	ui.set_title(skill_name)
+	ui.set_title(skill_data.name)
+	ui.set_icon(skill_data.icon)
 	modulate = Color.WHITE if is_dependence_unlocked() else Color(1, 1, 1, 0.5)
 
 
@@ -97,3 +98,15 @@ func _update_focus_button():
 		button.focus_neighbor_bottom = _ui_bottom.button.get_path()
 
 
+var _skill_names: Array = Database.get_skill_keys()
+func _get_property_list() -> Array[Dictionary]:
+	var properties: Array[Dictionary] = []
+	
+	properties.append({
+		name = "base_skill",
+		type = TYPE_STRING_NAME,
+		hint = PROPERTY_HINT_ENUM_SUGGESTION,
+		hint_string = ",".join(PackedStringArray(_skill_names)),
+	})
+	
+	return properties
