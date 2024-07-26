@@ -67,3 +67,5 @@ position = Vector2(0, 44)
 
 [node name="UP" type="Marker2D" parent="ConnectNodes"]
 position = Vector2(0, -44)
+
+[connection signal="pressed" from="UI/Button" to="." method="_pressed"]

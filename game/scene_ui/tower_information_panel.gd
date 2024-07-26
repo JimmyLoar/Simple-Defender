@@ -30,6 +30,7 @@ func _input(event: InputEvent) -> void:
 		if towers_builder.is_building_mode(): 
 			hide()
 			return
+		
 		update(towers_builder.get_tower_below_cursor())
 	
 	elif event.is_action_released("ui_close"):
@@ -53,3 +54,12 @@ func update_name(new_name: String):
 
 func _on_button_pressed() -> void:
 	upgrade_pressed.emit()
+
+
+func _on_visibility_changed() -> void:
+	if not towers_builder: return
+	towers_builder._cursor.set_process(not visible)
+
+
+func _on_close_button_pressed() -> void:
+	hide()

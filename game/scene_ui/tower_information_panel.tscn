@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxc6iu2h8ywfh"]
+[gd_scene load_steps=5 format=3 uid="uid://dxc6iu2h8ywfh"]
 
 [ext_resource type="Script" path="res://game/scene_ui/tower_information_panel.gd" id="1_x4slg"]
 [ext_resource type="PackedScene" uid="uid://w5eopltwtgwt" path="res://game/scene_ui/stat_display.tscn" id="2_68wuj"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_52hdv"]
+device = -1
+keycode = 71
+unicode = 103
+
+[sub_resource type="Shortcut" id="Shortcut_l5gag"]
+events = [SubResource("InputEventKey_52hdv")]
 
 [node name="TowerInformation" type="PanelContainer"]
 anchors_preset = -1
@@ -30,7 +38,7 @@ text = "Tower name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -47,14 +55,17 @@ size_flags_horizontal = 3
 _font_size = 24
 display_mode = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="UpgradeButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 24
+shortcut = SubResource("Shortcut_l5gag")
 text = "Upgrade Tree [G]"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
 mouse_filter = 2
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/UpgradeButton" to="." method="_on_button_pressed"]

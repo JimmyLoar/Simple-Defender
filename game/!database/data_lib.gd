@@ -26,6 +26,7 @@ func has(key: String, is_packed_scene := false) -> bool:
 
 
 func get_data(key: String) -> Variant:
+	if key == "": return null
 	if not has(key): 
 		_logger.warn("not found data with key '%s', getting 'null'" % [key])
 		_logger.info("existed keys: %s" % [_data.keys()])

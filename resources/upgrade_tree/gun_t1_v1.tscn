@@ -6,22 +6,54 @@
 [node name="TreeDisplay" instance=ExtResource("1_tms7y")]
 position = Vector2(280, 400)
 
-[node name="Damage" parent="NodesBox" index="1" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+[node name="Root" parent="NodesBox/T1" index="0" node_paths=PackedStringArray("_ui_top")]
+_ui_top = NodePath("../Firerate")
+base_skill = &"tower_gun"
+
+[node name="Label" parent="NodesBox/T1/Root/UI/Extends" index="0"]
+text = "Tower Gun"
+
+[node name="Damage" parent="NodesBox/T1" index="1" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(-126, -150)
 dependence = [NodePath("../Root")]
+_ui_left = NodePath("../Range")
+_ui_right = NodePath("../Firerate")
+_ui_top = NodePath("../Damage2")
+_ui_bottom = NodePath("../Root")
+base_skill = &"damage_l1"
 
-[node name="Range" parent="NodesBox" index="2" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+[node name="Range" parent="NodesBox/T1" index="2" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(128, -152)
 dependence = [NodePath("../Root")]
+_ui_left = NodePath("../Firerate")
+_ui_right = NodePath("../Damage")
+_ui_top = NodePath("../Focus")
+_ui_bottom = NodePath("../Root")
+base_skill = &"range"
 
-[node name="Firerate" parent="NodesBox" index="3" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+[node name="Firerate" parent="NodesBox/T1" index="3" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(0, -152)
 dependence = [NodePath("../Root")]
+_ui_left = NodePath("../Damage")
+_ui_right = NodePath("../Range")
+_ui_top = NodePath("../Focus")
+_ui_bottom = NodePath("../Root")
+base_skill = &"firerate"
 
-[node name="Damage2" parent="NodesBox" index="4" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+[node name="Damage2" parent="NodesBox/T1" index="4" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(-126, -302)
 dependence = [NodePath("../Damage")]
+_ui_left = NodePath("../Focus")
+_ui_right = NodePath("../Focus")
+_ui_bottom = NodePath("../Damage")
+base_skill = &"damage_l1"
 
-[node name="Focus" parent="NodesBox" index="5" node_paths=PackedStringArray("dependence") instance=ExtResource("2_lvbpq")]
+[node name="Focus" parent="NodesBox/T1" index="5" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(64, -302)
 dependence = [NodePath("../Firerate"), NodePath("../Range")]
+_ui_left = NodePath("../Damage2")
+_ui_right = NodePath("../Damage2")
+_ui_bottom = NodePath("../Firerate")
+base_skill = &"focus"
+
+[editable path="NodesBox/T1/Root"]

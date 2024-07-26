@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_key_motion()
 
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if mouse_motion:
 		_mouse_follow()
 		return

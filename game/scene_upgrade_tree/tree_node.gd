@@ -2,8 +2,8 @@
 class_name TreeNode
 extends Marker2D
 
-signal unloked(node: TreeNode)
-
+signal want_unlock(node: TreeNode)
+signal unloked
 
 @export var dependence: Array[TreeNode] = []
 @export var prise = {
@@ -11,6 +11,13 @@ signal unloked(node: TreeNode)
 	"energy": 0,
 	"scrap":  0,
 }
+
+
+enum InfluenceType{NONE, CHANGE_TOWER, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
+@export_group("Influence", "influence_")
+@export var influence_type : InfluenceType = InfluenceType.NONE
+@export var influence_property_name := ""
+@export var influence_property_value := ""
 
 
 @export_group("UI Focus", "_ui")
@@ -21,6 +28,7 @@ signal unloked(node: TreeNode)
 
 
 var base_skill: StringName = &"none"
+var logger := GodotLogger.with("%s" % self)
 
 var _unlocked := false
 
@@ -36,6 +44,7 @@ func _ready() -> void:
 	var lib : DataLib = Database.get_skill_lib()
 	skill_data = lib.get_data(base_skill)
 	skill_data.merge(lib.get_data(&"none"))
+	logger.debug("loaded skill data '%s': %s" % [base_skill, skill_data])
 	
 	if Engine.is_editor_hint():
 		connection_markers.set_connect_position(ui.size)
@@ -43,15 +52,21 @@ func _ready() -> void:
 		ui.set_icon(skill_data.icon)
 	
 	else:
-		call_deferred("_update_focus_button")
 		update()
+		call_deferred("_update_focus_button")
 		_connect_to_deperance()
+	
+	logger.debug("ready!")
 
 
 func update():
 	ui.set_title(skill_data.name)
 	ui.set_icon(skill_data.icon)
-	modulate = Color.WHITE if is_dependence_unlocked() else Color(1, 1, 1, 0.5)
+	if is_unlock():
+		modulate = Color.LIGHT_SALMON
+	
+	else:
+		modulate = Color.WHITE if is_dependence_unlocked(false) else Color(1, 1, 1, 0.5)
 
 
 func get_connect_markers() -> Array[Node]:
@@ -71,15 +86,25 @@ func get_up_marker() -> Marker2D:
 	return connection_markers.up
 
 
+func unlock():
+	if not is_dependence_unlocked(false):
+		return
+	
+	_unlocked = true
+	update()
+	unloked.emit()
+
+
 func is_unlock() -> bool: return _unlocked
 
 
-func is_dependence_unlocked() -> bool:
+func is_dependence_unlocked(is_all := true) -> bool:
 	if dependence.is_empty(): return true
-	return dependence.all(
-		func(node: TreeNode):
-			return node.is_unlock()
-	)
+	var function = func(node: TreeNode):
+		if not node is TreeNode: return true
+		return node.is_unlock()
+	if is_all: return dependence.all(function)
+	else: return dependence.any(function)
 
 
 func _connect_to_deperance():
@@ -110,3 +135,7 @@ func _get_property_list() -> Array[Dictionary]:
 	})
 	
 	return properties
+
+
+func _pressed() -> void:
+	want_unlock.emit(self)
