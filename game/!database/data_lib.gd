@@ -6,16 +6,17 @@ extends Resource
 @export var _data_unpacked := Dictionary()
 
 
-var _logger:= GodotLogger.with("DataLib")
+var _logger:= GodotLogger.with("%s" % self)
 
 
 func _init(new_data := {}) -> void:
 	_data = new_data
-	_data_unpacked.clear()
+	_logger.info("ready! Init data is '%s'" % _data)
 
 
-func add_data(key, value):
+func set_for_key(key: String, value):
 	_data[key] = value
+	_logger.debug("set '%s' value '%s'" %[key, value])
 
 
 func has(key: String, is_packed_scene := false) -> bool:
@@ -25,7 +26,7 @@ func has(key: String, is_packed_scene := false) -> bool:
 	return _has
 
 
-func get_data(key: String) -> Variant:
+func get_for_key(key: String) -> Variant:
 	if key == "": return null
 	if not has(key): 
 		_logger.warn("not found data with key '%s', getting 'null'" % [key])
@@ -36,7 +37,7 @@ func get_data(key: String) -> Variant:
 
 func get_node(key: String, unique := true) -> Node:
 	if not has(key, true): 
-		_logger.warn("not found packed scene with key '%s', getting 'null' node" % [key])
+		_logger.warn("not found PackedScene with key '%s', getting 'null' node" % [key])
 		_logger.info("existed keys: %s" % [_data.keys()])
 		return null
 	

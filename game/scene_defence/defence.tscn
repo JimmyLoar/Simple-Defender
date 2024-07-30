@@ -14,6 +14,7 @@ func _on_tower_information_sell_pressed() -> void:
 
 func _on_tower_information_upgrade_pressed() -> void:
 	%UpgradeTreePanel.show()
+	%UpgradeTreePanel.set_tower(%TowerInformation.displayed_tower)
 
 
 func _on_tower_information_visibility_changed() -> void:
@@ -36,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-mouse_filter = 0
+mouse_filter = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -44,7 +45,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer"]
 layout_mode = 2
-mouse_filter = 0
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="TowerInformation" parent="UI/MarginContainer/HBoxContainer" instance=ExtResource("3_swa0x")]
@@ -63,6 +64,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+mouse_filter = 2
 
 [connection signal="sell_pressed" from="UI/MarginContainer/HBoxContainer/TowerInformation" to="UI" method="_on_tower_information_sell_pressed"]
 [connection signal="upgrade_pressed" from="UI/MarginContainer/HBoxContainer/TowerInformation" to="UI" method="_on_tower_information_upgrade_pressed"]

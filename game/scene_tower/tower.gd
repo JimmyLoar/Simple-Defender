@@ -1,16 +1,24 @@
 class_name TowerBase
 extends Node2D
 
+signal stats_changed
+
+const IGNOR_STAT_KEYS = [
+	"weapon", "projectile"
+]
+
+@export_enum("gun", "laser", "area", "factory") var tree_name := "gun"
 @export var tower_name := "TowerBase"
 @export var size := 1: set = set_size
 @export var base_stats := {
 	"damage": 1.0,
 	"firerate": 1.0,
 	"vision_range": 1.0,
-}:
-	get = get_stats
+}
 
 @export var upgrade_tree: PackedScene
+
+@export var new_stats: DataLibOrigins
 
 @onready var radar = %Radar
 @onready var body = %Body
@@ -23,6 +31,10 @@ var _logger: Log = GodotLogger.with("%s" % [self])
 func _init() -> void:
 	if not ready.is_connected(update):
 		ready.connect(update)
+
+
+func _ready() -> void:
+	new_stats = DataLibOrigins.new(base_stats)
 
 
 func update() -> void:
@@ -46,10 +58,32 @@ func set_size(value: int):
 		_update_size()
 
 
-func get_stats() -> Dictionary:
+func set_stat(key: String, value: Variant):
+	base_stats[key] = value
+	stats_changed.emit(self)
+	printerr("set stats | new stats %s" % base_stats)
+
+
+func add_stat(key: String, value: Variant):
+	if base_stats.has(key):
+		base_stats[key] += convert(value, typeof(base_stats[key]))
+		stats_changed.emit(self)
+		printerr("add stats | new stats %s" % base_stats)
+		return
+	set_stat(key, value)
+
+
+func get_stats(is_dysplay := false) -> Dictionary:
 	var stats = base_stats.duplicate(true)
 	stats.merge(_get_stats())
+	stats = stats.duplicate(true)
+	if is_dysplay:
+		for key in stats.keys():
+			if not IGNOR_STAT_KEYS.has(key):
+				continue
+			stats.erase(key)
 	return stats
+
 
 
 func _get_stats() -> Dictionary:

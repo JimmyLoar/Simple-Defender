@@ -25,24 +25,42 @@ var _data := {
 			"icon": preload('res://icon.svg'),
 			#"modulate": Color.WHITE,
 			"discription": "",
+			"influence_type": TreeNode.InfluenceType.NONE,
+			"influence_name": "none",
+			"influence_value": "",
 		},
 		 &"tower_gun" : {
 			"name": "Tower Gun",
 		},
 		&"damage_l1" : {
 			"name": "Damage",
+			"influence_type": TreeNode.InfluenceType.ADD_TO_PROPERTY,
+			"influence_name": "damage",
+			"influence_value": "3",
 		},
 		&"damage_l2" : {
 			"name": "Damage +",
+			"influence_type": TreeNode.InfluenceType.ADD_TO_PROPERTY,
+			"influence_name": "damage",
+			"influence_value": "5",
 		},
 		&"firerate" : {
 			"name": "Firerate",
+			"influence_type": TreeNode.InfluenceType.ADD_TO_PROPERTY,
+			"influence_name": "firerate",
+			"influence_value": "2",
 		},
 		&"range" : {
 			"name": "Range",
+			"influence_type": TreeNode.InfluenceType.ADD_TO_PROPERTY,
+			"influence_name": "vision_range",
+			"influence_value": "1.25",
 		},
 		&"focus" : {
 			"name": "Focus",
+			"influence_type": TreeNode.InfluenceType.ADD_TO_PROPERTY,
+			"influence_name": "vision_range,firerate",
+			"influence_value": "0.5,1",
 		},
 	}),
 }

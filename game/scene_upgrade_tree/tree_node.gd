@@ -13,7 +13,7 @@ signal unloked
 }
 
 
-enum InfluenceType{NONE, CHANGE_TOWER, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
+enum InfluenceType{NONE, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
 @export_group("Influence", "influence_")
 @export var influence_type : InfluenceType = InfluenceType.NONE
 @export var influence_property_name := ""
@@ -27,7 +27,10 @@ enum InfluenceType{NONE, CHANGE_TOWER, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
 @export var _ui_bottom: TreeNode
 
 
-var base_skill: StringName = &"none"
+var base_skill: StringName = &"none":
+	set(value):
+		base_skill = value
+		_update_influence(value)
 var logger := GodotLogger.with("%s" % self)
 
 var _unlocked := false
@@ -42,8 +45,8 @@ var _unlocked := false
 
 func _ready() -> void:
 	var lib : DataLib = Database.get_skill_lib()
-	skill_data = lib.get_data(base_skill)
-	skill_data.merge(lib.get_data(&"none"))
+	skill_data = lib.get_for_key(base_skill)
+	skill_data.merge(lib.get_for_key(&"none"))
 	logger.debug("loaded skill data '%s': %s" % [base_skill, skill_data])
 	
 	if Engine.is_editor_hint():
@@ -57,6 +60,7 @@ func _ready() -> void:
 		_connect_to_deperance()
 	
 	logger.debug("ready!")
+	button.button_pressed = true
 
 
 func update():
@@ -134,8 +138,21 @@ func _get_property_list() -> Array[Dictionary]:
 		hint_string = ",".join(PackedStringArray(_skill_names)),
 	})
 	
+
 	return properties
 
 
 func _pressed() -> void:
 	want_unlock.emit(self)
+
+
+func _update_influence(value: String):
+	var data: Dictionary = Database.get_skill_lib().get_for_key(value)
+	if not data.has("influence_type") or data.influence_type == TreeNode.InfluenceType.NONE \
+		or influence_type != InfluenceType.NONE:
+		return
+	 
+	influence_type = data.influence_type
+	influence_property_name = data.influence_name
+	influence_property_value = data.influence_value
+	notify_property_list_changed()
