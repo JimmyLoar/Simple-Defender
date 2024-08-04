@@ -1,7 +1,7 @@
 class_name TowerBase
 extends Node2D
 
-signal stats_changed
+signal stats_changed(tower: TowerBase)
 
 const IGNOR_STAT_KEYS = [
 	"weapon", "projectile"
@@ -15,6 +15,7 @@ const IGNOR_STAT_KEYS = [
 	"firerate": 1.0,
 	"vision_range": 1.0,
 }
+@export var _skill_stats: Dictionary = {}
 
 @export var upgrade_tree: PackedScene
 
@@ -59,34 +60,32 @@ func set_size(value: int):
 		_update_size()
 
 
-func set_stat(key: String, value: Variant):
-	base_stats[key] = value
+func set_stat(key: String, value: Variant, type: int = TYPE_INT):
+	_skill_stats[key] = convert(value, type)
 	stats_changed.emit(self)
-	printerr("set stats | new stats %s" % base_stats)
+	#printerr("set stats | new stats %s" % base_stats)
 
 
 func add_stat(key: String, value: Variant):
-	if base_stats.has(key):
-		base_stats[key] += convert(value, typeof(base_stats[key]))
+	var type := TYPE_INT
+	if Database.get_skill_keys().has(key):
+		type = Database.get_skill_lib().get_for_key(key).influence_type
+	
+	if _skill_stats.has(key):
+		_skill_stats[key] += convert(value, type)
 		stats_changed.emit(self)
-		printerr("add stats | new stats %s" % base_stats)
+		#printerr("add stats | new stats %s" % base_stats)
 		return
-	set_stat(key, value)
+	
+	set_stat(key, value, type)
 
 
 func get_stats(is_dysplay := false) -> Dictionary:
 	var stats = base_stats.duplicate(true)
-	stats.merge(_get_stats())
-	stats = stats.duplicate(true)
-	if is_dysplay:
-		for key in stats.keys():
-			if not IGNOR_STAT_KEYS.has(key):
-				continue
-			stats.erase(key)
+	stats.merge(_get_stats(), true)
 	return stats
 
 
-
 func _get_stats() -> Dictionary:
-	return {}
+	return _skill_stats
 

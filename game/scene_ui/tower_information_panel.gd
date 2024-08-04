@@ -42,8 +42,14 @@ func update(_tower: TowerBase):
 		hide()
 		return
 	
-	displayed_tower = _tower
-	_tower.stats_changed.connect(update, CONNECT_ONE_SHOT)
+	if displayed_tower != _tower: 
+		if displayed_tower:
+			if displayed_tower.stats_changed.is_connected(update):
+				displayed_tower.stats_changed.disconnect(update)
+			
+		_tower.stats_changed.connect(update, CONNECT_ONE_SHOT)
+		displayed_tower = _tower
+	
 	if not visible: show()
 	update_name(displayed_tower.tower_name)
 	_synh.synhonize(displayed_tower.get_stats())

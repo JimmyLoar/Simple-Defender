@@ -38,8 +38,9 @@ func get_unlock_skills() -> PackedStringArray:
 func is_avaible_unlock(node: TreeNode):
 	node.unlock()
 	
-	#WARN Может привисмти к багу, если использовать не уникальные названия для скилов
 	_unlocked_skills.append(node.get_skill_name())
+	if not selected_tower:
+		return
 	
 	var keys = node.influence_property_name.split(",")
 	var values = node.influence_property_value.split(",")
