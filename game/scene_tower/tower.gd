@@ -25,6 +25,7 @@ const IGNOR_STAT_KEYS = [
 
 
 @onready var properties := DataProperties.new()
+var unlocked_skills: PackedStringArray = []
 var _logger: Log = GodotLogger.with("%s" % [self])
 
 

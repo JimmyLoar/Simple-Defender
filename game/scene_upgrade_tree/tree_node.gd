@@ -73,6 +73,12 @@ func update():
 		modulate = Color.WHITE if is_dependence_unlocked(false) else Color(1, 1, 1, 0.5)
 
 
+func get_skill_name() -> String:
+	if not skill_data:
+		return "SkillNone"
+	return "%s%03d%03d" % [skill_data.name, get_parent().get_index(), get_index()]
+
+
 func get_connect_markers() -> Array[Node]:
 	return connection_markers.get_children()
 
@@ -90,13 +96,18 @@ func get_up_marker() -> Marker2D:
 	return connection_markers.up
 
 
+func set_unlock(value: bool):
+	_unlocked = value
+	update()
+	if _unlocked: 
+		unloked.emit()
+
+
 func unlock():
 	if not is_dependence_unlocked(false):
 		return
 	
-	_unlocked = true
-	update()
-	unloked.emit()
+	set_unlock(true)
 
 
 func is_unlock() -> bool: return _unlocked
