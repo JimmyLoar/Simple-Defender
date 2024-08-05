@@ -13,13 +13,6 @@ signal unloked
 }
 
 
-enum InfluenceType{NONE, CHANGE_TOWER, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
-@export_group("Influence", "influence_")
-@export var influence_type : InfluenceType = InfluenceType.NONE
-@export var influence_property_name := ""
-@export var influence_property_value := ""
-
-
 @export_group("UI Focus", "_ui")
 @export var _ui_left: TreeNode
 @export var _ui_right: TreeNode
@@ -27,7 +20,10 @@ enum InfluenceType{NONE, CHANGE_TOWER, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
 @export var _ui_bottom: TreeNode
 
 
-var base_skill: StringName = &"none"
+var base_skill: StringName = &"none":
+	set(value):
+		base_skill = value
+		notify_property_list_changed()
 var logger := GodotLogger.with("%s" % self)
 
 var _unlocked := false
@@ -42,8 +38,8 @@ var _unlocked := false
 
 func _ready() -> void:
 	var lib : DataLib = Database.get_skill_lib()
-	skill_data = lib.get_data(base_skill)
-	skill_data.merge(lib.get_data(&"none"))
+	skill_data = lib.get_for_key(base_skill)
+	skill_data.merge(lib.get_for_key(&"none"))
 	logger.debug("loaded skill data '%s': %s" % [base_skill, skill_data])
 	
 	if Engine.is_editor_hint():
@@ -57,6 +53,7 @@ func _ready() -> void:
 		_connect_to_deperance()
 	
 	logger.debug("ready!")
+	button.button_pressed = true
 
 
 func update():
@@ -67,6 +64,12 @@ func update():
 	
 	else:
 		modulate = Color.WHITE if is_dependence_unlocked(false) else Color(1, 1, 1, 0.5)
+
+
+func get_skill_name() -> String:
+	if not skill_data:
+		return "SkillNone"
+	return "%s%03d%03d" % [skill_data.name, get_parent().get_index(), get_index()]
 
 
 func get_connect_markers() -> Array[Node]:
@@ -86,13 +89,18 @@ func get_up_marker() -> Marker2D:
 	return connection_markers.up
 
 
+func set_unlock(value: bool):
+	_unlocked = value
+	update()
+	if _unlocked: 
+		unloked.emit()
+
+
 func unlock():
 	if not is_dependence_unlocked(false):
 		return
 	
-	_unlocked = true
-	update()
-	unloked.emit()
+	set_unlock(true)
 
 
 func is_unlock() -> bool: return _unlocked
@@ -139,3 +147,5 @@ func _get_property_list() -> Array[Dictionary]:
 
 func _pressed() -> void:
 	want_unlock.emit(self)
+
+

@@ -30,7 +30,7 @@ func reset():
 func _add_to_data():
 	var data_key: String = enemy_name.to_snake_case()
 	if not data or data.has(data_key): return
-	data.add_data(data_key, scene_file_path)
+	data.set_for_key(data_key, scene_file_path)
 
 
 func _enter_tree():

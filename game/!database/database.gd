@@ -25,24 +25,44 @@ var _data := {
 			"icon": preload('res://icon.svg'),
 			#"modulate": Color.WHITE,
 			"discription": "",
+			"influence_type": [TYPE_FLOAT],
+			"influence_key": [],
+			"influence_value": [0.0],
 		},
-		 &"tower_gun" : {
+		 &"root_gun" : {
+			"extends" : &"none",
 			"name": "Tower Gun",
 		},
 		&"damage_l1" : {
+			"extends" : &"none",
 			"name": "Damage",
+			"influence_type": [TYPE_INT],
+			"influence_key": ["damage"],
+			"influence_value": [3],
 		},
 		&"damage_l2" : {
+			"extends" : &"damage_l1",
 			"name": "Damage +",
+			"influence_value": [5],
 		},
 		&"firerate" : {
+			"extends" : &"none",
 			"name": "Firerate",
+			"influence_key": ["firerate"],
+			"influence_value": [2.0],
 		},
 		&"range" : {
+			"extends" : &"none",
 			"name": "Range",
+			"influence_key": ["vision_range"],
+			"influence_value": [1.25],
 		},
 		&"focus" : {
+			"extends" : &"none",
 			"name": "Focus",
+			"influence_type": [TYPE_FLOAT, TYPE_FLOAT],
+			"influence_key": ["vision_range", "firerate"],
+			"influence_value": [0.5, 1.0],
 		},
 	}),
 }
@@ -72,6 +92,22 @@ func get_skill_keys() -> Array:
 
 
 func _ready() -> void:
+	init_skills()
 	_logger.info("database has libs '%s'" % _data)
+
+func init_skills():
+	var skills_data := get_skill_lib().get_all_data()
+	for key: String in skills_data.keys():
+		var skill: Dictionary = skills_data[key]
+		var vkey = key
+		while skills_data[vkey].has("extends"):
+			vkey = skills_data[vkey].extends
+			skill.merge(skills_data[vkey])
+		
+		get_skill_lib().set_for_key(key, skill)
+		
+		
+		
+		
 
 
