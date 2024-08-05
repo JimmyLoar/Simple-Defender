@@ -18,6 +18,7 @@ func _init(new_data := {}) -> void:
 func set_for_key(key: String, value):
 	if not _data.has(key):
 		_origins[key] = {}
+	
 	_data[key] = value
 	recount_one_data(key)
 
