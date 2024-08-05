@@ -3,7 +3,7 @@ extends Node
 
 
 var _data := {
-	tower = DataLib.new({
+	tower = DataLibPackedScene.new({
 		&"gun_main": preload('res://resources/towers/gun/gun_main.tscn'),
 		&"gun_a": preload('res://resources/towers/gun/gun_a.tscn'),
 		&"gun_b": preload('res://resources/towers/gun/gun_b.tscn'),

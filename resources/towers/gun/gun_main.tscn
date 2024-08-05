@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://f13h4hllkm1l" path="res://game/scene_tower/attaker_tower.tscn" id="1_g5ac0"]
 [ext_resource type="PackedScene" uid="uid://64h3lvpekpcf" path="res://game/scene_tower/weapons/weapon_projectile.tscn" id="2_th01w"]
+[ext_resource type="Script" path="res://game/!database/lib_orogins.gd" id="3_klw3t"]
 [ext_resource type="Script" path="res://addons/shape_texture_2d/shape_texture_2d.gd" id="3_qyokb"]
-[ext_resource type="Script" path="res://game/!database/lib_orogins.gd" id="3_ux1md"]
 [ext_resource type="Script" path="res://addons/shape_texture_2d/drawable_polygon.gd" id="4_407wt"]
 
 [sub_resource type="Resource" id="Resource_sytbn"]
-script = ExtResource("3_ux1md")
+script = ExtResource("3_klw3t")
 _data = {}
 
 [sub_resource type="Gradient" id="Gradient_3beox"]
