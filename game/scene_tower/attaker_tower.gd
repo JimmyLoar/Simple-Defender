@@ -9,6 +9,7 @@ var weapon : TowerWeapon
 func _ready() -> void:
 	base_stats["weapon"] = preload('res://game/scene_tower/weapons/weapon_projectile.tscn')
 	base_stats["attacker_entity"] = preload('res://game/scene_tower/projectiles/!projectile.tscn')
+	change_weapon()
 
 
 func _update():

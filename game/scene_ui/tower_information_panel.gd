@@ -47,7 +47,7 @@ func update(_tower: TowerBase):
 			if displayed_tower.stats_changed.is_connected(update):
 				displayed_tower.stats_changed.disconnect(update)
 			
-		_tower.stats_changed.connect(update, CONNECT_ONE_SHOT)
+		_tower.stats_changed.connect(update)
 		displayed_tower = _tower
 	
 	if not visible: show()

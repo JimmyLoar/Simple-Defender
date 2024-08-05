@@ -25,38 +25,38 @@ func connection_nodes():
 
 
 func set_unlock_skills(list: PackedStringArray):
-	_unlocked_skills = list
+	if list.is_empty():
+		_unlocked_skills = [$NodesBox/T1/Root.get_skill_name()]
+	
+	else:
+		_unlocked_skills = list
+	
 	for tree: SubTree in node_box.get_children():
 		for node: TreeNode in tree.get_children():
 			node.set_unlock(_unlocked_skills.has(node.get_skill_name()))
 
 
 func get_unlock_skills() -> PackedStringArray:
-	return _unlocked_skills
+	return _unlocked_skills 
 
 
 func is_avaible_unlock(node: TreeNode):
+	if node.is_unlock(): 
+		return
+	
 	node.unlock()
 	
 	_unlocked_skills.append(node.get_skill_name())
-	if not selected_tower:
+	if not selected_tower or node.skill_data["influence_type"].is_empty():
 		return
 	
-	var keys = node.influence_property_name.split(",")
-	var values = node.influence_property_value.split(",")
-	
-	match node.influence_type:
-		node.InfluenceType.CHANGE_PROPERTY:
-			apply_stat(keys, values, "set_stat")
-			
-		node.InfluenceType.ADD_TO_PROPERTY:
-			apply_stat(keys, values, "add_stat")
+	apply_stat(node.skill_data["influence_key"], node.skill_data["influence_value"], node.skill_data["influence_type"])
 
 
-func apply_stat(keys: Array, values: Array, fname: String):
-	var amount: int = min(keys.size(), values.size())
+func apply_stat(keys: Array, values: Array, types: Array):
+	var amount: int = mini(mini(keys.size(), values.size()), types.size())
 	for i in amount:
-		selected_tower.call(fname, keys[i], values[i])
+		selected_tower.add_stat(keys[i], values[i], types[i])
 
 
 func set_tower(tower: TowerBase):

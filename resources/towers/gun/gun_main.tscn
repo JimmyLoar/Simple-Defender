@@ -47,8 +47,8 @@ scale = Vector2(1, 1)
 weapon_packed = ExtResource("2_th01w")
 tower_name = "Gun"
 base_stats = {
-"damage": 1.0,
-"firerate": 1.0,
+"damage": 2.0,
+"firerate": 1.2,
 "vision_range": 3.0
 }
 new_stats = SubResource("Resource_sytbn")

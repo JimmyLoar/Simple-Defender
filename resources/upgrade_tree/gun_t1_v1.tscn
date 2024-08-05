@@ -7,17 +7,14 @@
 position = Vector2(280, 400)
 
 [node name="Root" parent="NodesBox/T1" index="0" node_paths=PackedStringArray("_ui_top")]
+modulate = Color(1, 0.627451, 0.478431, 1)
 position = Vector2(3, 1)
-influence_property_name = "none"
 _ui_top = NodePath("../Firerate")
-base_skill = &"tower_gun"
+base_skill = &"root_gun"
 
 [node name="Damage" parent="NodesBox/T1" index="1" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(-126, -150)
 dependence = [NodePath("../Root")]
-influence_type = 2
-influence_property_name = "damage"
-influence_property_value = "3"
 _ui_left = NodePath("../Range")
 _ui_right = NodePath("../Firerate")
 _ui_top = NodePath("../Damage2")
@@ -27,9 +24,6 @@ base_skill = &"damage_l1"
 [node name="Range" parent="NodesBox/T1" index="2" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(128, -152)
 dependence = [NodePath("../Root")]
-influence_type = 2
-influence_property_name = "vision_range"
-influence_property_value = "1.25"
 _ui_left = NodePath("../Firerate")
 _ui_right = NodePath("../Damage")
 _ui_top = NodePath("../Focus")
@@ -39,9 +33,6 @@ base_skill = &"range"
 [node name="Firerate" parent="NodesBox/T1" index="3" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_top", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(0, -152)
 dependence = [NodePath("../Root")]
-influence_type = 2
-influence_property_name = "firerate"
-influence_property_value = "2"
 _ui_left = NodePath("../Damage")
 _ui_right = NodePath("../Range")
 _ui_top = NodePath("../Focus")
@@ -51,20 +42,14 @@ base_skill = &"firerate"
 [node name="Damage2" parent="NodesBox/T1" index="4" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(-126, -302)
 dependence = [NodePath("../Damage")]
-influence_type = 2
-influence_property_name = "damage"
-influence_property_value = "5"
 _ui_left = NodePath("../Focus")
 _ui_right = NodePath("../Focus")
 _ui_bottom = NodePath("../Damage")
-base_skill = &"damage_l1"
+base_skill = &"damage_l2"
 
 [node name="Focus" parent="NodesBox/T1" index="5" node_paths=PackedStringArray("dependence", "_ui_left", "_ui_right", "_ui_bottom") instance=ExtResource("2_lvbpq")]
 position = Vector2(64, -302)
 dependence = [NodePath("../Firerate"), NodePath("../Range")]
-influence_type = 2
-influence_property_name = "vision_range,firerate"
-influence_property_value = "0.5,1"
 _ui_left = NodePath("../Damage2")
 _ui_right = NodePath("../Damage2")
 _ui_bottom = NodePath("../Firerate")

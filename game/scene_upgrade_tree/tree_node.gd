@@ -13,13 +13,6 @@ signal unloked
 }
 
 
-enum InfluenceType{NONE, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
-@export_group("Influence", "influence_")
-@export var influence_type : InfluenceType = InfluenceType.NONE
-@export var influence_property_name := ""
-@export var influence_property_value := ""
-
-
 @export_group("UI Focus", "_ui")
 @export var _ui_left: TreeNode
 @export var _ui_right: TreeNode
@@ -30,7 +23,7 @@ enum InfluenceType{NONE, CHANGE_PROPERTY, ADD_TO_PROPERTY,}
 var base_skill: StringName = &"none":
 	set(value):
 		base_skill = value
-		_update_influence(value)
+		notify_property_list_changed()
 var logger := GodotLogger.with("%s" % self)
 
 var _unlocked := false
@@ -149,7 +142,6 @@ func _get_property_list() -> Array[Dictionary]:
 		hint_string = ",".join(PackedStringArray(_skill_names)),
 	})
 	
-
 	return properties
 
 
@@ -157,13 +149,3 @@ func _pressed() -> void:
 	want_unlock.emit(self)
 
 
-func _update_influence(value: String):
-	var data: Dictionary = Database.get_skill_lib().get_for_key(value)
-	if not data.has("influence_type") or data.influence_type == TreeNode.InfluenceType.NONE \
-		or influence_type != InfluenceType.NONE:
-		return
-	 
-	influence_type = data.influence_type
-	influence_property_name = data.influence_name
-	influence_property_value = data.influence_value
-	notify_property_list_changed()

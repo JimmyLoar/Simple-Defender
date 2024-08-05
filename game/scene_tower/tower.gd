@@ -35,10 +35,6 @@ func _init() -> void:
 		ready.connect(update)
 
 
-func _ready() -> void:
-	new_stats = DataLibOrigins.new(base_stats)
-
-
 func update() -> void:
 	_update_info()
 	_update_size()
@@ -61,26 +57,28 @@ func set_size(value: int):
 
 
 func set_stat(key: String, value: Variant, type: int = TYPE_INT):
+	var _old = get_stats()[key] 
+	if base_stats.has(key):
+		value += base_stats[key]
 	_skill_stats[key] = convert(value, type)
+	_logger.debug("SET skill stat '%s' on '%s' (%s) | old '%s'" % [key, value, get_stats()[key], _old])
 	stats_changed.emit(self)
-	#printerr("set stats | new stats %s" % base_stats)
 
 
-func add_stat(key: String, value: Variant):
-	var type := TYPE_INT
-	if Database.get_skill_keys().has(key):
-		type = Database.get_skill_lib().get_for_key(key).influence_type
-	
+func add_stat(key: String, value: Variant, type: int):
 	if _skill_stats.has(key):
+		var _old = get_stats()[key] 
 		_skill_stats[key] += convert(value, type)
 		stats_changed.emit(self)
-		#printerr("add stats | new stats %s" % base_stats)
+		_logger.debug("ADD skill stat '%s' on '%s' (%s) | old '%s'" % [key, value, get_stats()[key], _old])
 		return
 	
+	#if base_stats.has(key) and typeof(value) != TYPE_STRING and typeof(value) != TYPE_OBJECT:
+		#value += base_stats[key]
 	set_stat(key, value, type)
 
 
-func get_stats(is_dysplay := false) -> Dictionary:
+func get_stats() -> Dictionary:
 	var stats = base_stats.duplicate(true)
 	stats.merge(_get_stats(), true)
 	return stats
