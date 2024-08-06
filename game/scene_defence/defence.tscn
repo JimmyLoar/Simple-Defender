@@ -61,6 +61,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="UI/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
