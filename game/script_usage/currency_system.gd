@@ -1,19 +1,24 @@
 class_name CurrencySystem
 extends Node
 
+signal value_changed
+signal data_changed
+
 const TEMPLATE = {
 	"name": "",
 	"translate_key": "",
 	"icon": null,
 	"value": 0.0,
+	"max": -1,
 }
 
 var _data: Dictionary= {} 
 var _logger := GodotLogger.with("CorrencySystem")
 
 
-func create(cname: String, icon: Texture, start_value: float = 0, override := false) -> Dictionary:
-	if has(cname) and not override:
+func create(cname: String, icon: Texture, start_value: float = 0, _max := -1, override := false) -> Dictionary:
+	var _has_data := has(cname)
+	if _has_data and not override:
 		_logger.warn("Can not create '%s' become data exist from this name" % cname)
 		return {}
 	
@@ -22,14 +27,20 @@ func create(cname: String, icon: Texture, start_value: float = 0, override := fa
 	new_data["translate_key"] = "CORRENCY_NAME_" + cname.to_upper()
 	new_data["icon"] = icon
 	new_data["value"] = start_value
+	new_data["max"] = _max
+	
 	_data[cname] = new_data
-	_logger.info("Created new corrency %s" % [new_data])
+	
+	var preffix = "Override" if _has_data else "Created new"
+	_logger.info("%s corrency %s" % [preffix, new_data])
+	data_changed.emit()
 	return new_data
 
 
 func has(cname: String) -> bool:
 	var result = _data.has(cname)
-	_logger.debug("Data %s '%s'" % ["HAVE" if result else " HAVE NOT", cname])
+	if not result:
+		_logger.warn("Data HAVE NOT '%s'" % [cname])
 	return result
 
 
@@ -39,12 +50,14 @@ func delete(cname: String) -> bool:
 	
 	_data.erase(cname)
 	_logger.debug("Deleted '%s'" % [cname])
+	data_changed.emit()
 	return true
 
 
 func set_all_values(new_value: float):
 	for key in _data.keys():
 		_data[key].value = new_value
+	value_changed.emit()
 
 
 func get_names():
@@ -73,8 +86,9 @@ func change(cname: String, on_value: float): #add value
 	if not has(cname):
 		return false
 	
-	_data[cname] += on_value
-	_logger.debug("Changed '%s' on '%0.3f' (%s)" % [cname, on_value, _data[cname]])
+	_data[cname].value += on_value
+	_logger.debug("Changed '%s' on '%0.3f' (%s)" % [cname, on_value, _data[cname].value])
+	value_changed.emit()
 	return true
 
 
@@ -82,7 +96,9 @@ func check_to_value(cname: String, check_value: float):
 	if not has(cname):
 		return false
 	
-	return check_value >= _data[cname].value
+	var result: bool = _data[cname].value >= check_value
+	_logger.debug("Checking %0.3f >= %0.3f is %s" % [_data[cname].value, check_value, result])
+	return result
 
 
 func pay(cname: String, prise: float):

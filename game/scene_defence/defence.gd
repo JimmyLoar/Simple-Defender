@@ -6,7 +6,7 @@ extends Node2D
 
 var level: Level
 var waves := WaveLoops.new()
-
+var currency: CurrencySystem
 
 var _logger := GodotLogger.with("DefenceScene")
 
@@ -15,7 +15,10 @@ var _logger := GodotLogger.with("DefenceScene")
 
 
 func _ready():
+	init_currency()
 	install_level()
+	
+	level.set_currency(currency)
 	
 	if not level: return
 	var enemy_keeper := level.get_enemy_keeper() as EnemiesKeeper
@@ -23,8 +26,7 @@ func _ready():
 	enemy_keeper.path_cleared.connect(waves.start_wave)
 	
 	_logger.info("Ready! Game Strted!", {}, Color.GREEN)
-	#start game
-	waves.call_deferred("start_wave")
+	waves.call_deferred("start_wave") #this start game
 
 
 func install_level(_level_packed: PackedScene = level_packed):
@@ -39,4 +41,18 @@ func install_level(_level_packed: PackedScene = level_packed):
 	tower_information_panel.towers_builder = level.get_tower_builder()
 
 
+func init_currency():
+	currency = CurrencySystem.new()
+	currency.value_changed.connect(__temporal__label_update)
+	%UpgradeTreePanel.set_currency(currency)
+	var icon_placeholder := preload('res://icon.svg')
+	currency.create("money", icon_placeholder, 500)
+	currency.create("scrap", icon_placeholder)
+	currency.create("energy", icon_placeholder, 15, 25)
+	__temporal__label_update()
 
+
+func __temporal__label_update():
+	$UI/UpperBar/HBoxContainer/Label.text = "Money: %s" %   [currency.get_value("money")]
+	$UI/UpperBar/HBoxContainer/Label2.text = "Energy: %s" % [currency.get_value("energy")]
+	$UI/UpperBar/HBoxContainer/Label3.text = "Scrap: %s" %  [currency.get_value("scrap")]

@@ -12,11 +12,12 @@ var selected_tower : TowerBase:
 	set = set_tower
 
 var _unlocked_skills: PackedStringArray = []
+var currency : CurrencySystem
 
 
 func _ready() -> void:
 	connection_nodes()
-	is_avaible_unlock($NodesBox/T1/Root)
+	call_deferred("is_avaible_unlock", $NodesBox/T1/Root)
 
 
 func connection_nodes():
@@ -43,6 +44,19 @@ func get_unlock_skills() -> PackedStringArray:
 func is_avaible_unlock(node: TreeNode):
 	if node.is_unlock(): 
 		return
+	
+	var prise_list: Dictionary = node.prise
+	if not prise_list.keys().all(
+		func(key): 
+			if prise_list[key] <= 0: return true
+			return currency.check_to_value(key, prise_list[key])
+	):
+		return 
+	
+	prise_list.keys().all(
+		func(key): 
+			return currency.change(key, prise_list[key] * -1)
+	)
 	
 	node.unlock()
 	

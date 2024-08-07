@@ -1,13 +1,16 @@
 class_name TowerBuilder
 extends Node2D
 
+@export var prise_list = [100, 100, 100, 100]
 
 var place_cheker: BusyPlaceChecker
+var currency: CurrencySystem
 
 var _cursor := HalographicCursor.new()
 var _logger := GodotLogger.with("Builder")
 
 var _builed_towers: Dictionary = {}
+var _last_pressed := -1
 
 
 func init_cursor() -> void:
@@ -24,7 +27,7 @@ const BUILD_PRESSED = {
 }
 
 func _input(event: InputEvent) -> void:
-	var key = _check_on_build_pressed(event)
+	var key = _get_key_pressed_tower(event)
 	if key != "":
 		if not is_building_mode():
 			_cursor.change_mode(_cursor.Mode.BUILD)
@@ -43,18 +46,30 @@ func _input(event: InputEvent) -> void:
 			_cursor.queue_redraw()
 
 
-func _check_on_build_pressed(event):
-	for key in BUILD_PRESSED.keys():
-		if event.is_action_released(key):
-			return key
+func _get_key_pressed_tower(event):
+	for key: String in BUILD_PRESSED.keys():
+		if not event.is_action_released(key):
+			continue
+		_last_pressed = key.to_int()
+		return key
 	
+	_last_pressed = -1
 	return ""
 
 
 func build_tower(tower_name: String):
-	if not _cursor.can_build(): return
+	if not _cursor.can_build(): 
+		return
+	
+	if not currency.check_to_value("money", prise_list[_last_pressed]):
+		return
+	
+	currency.change("money", prise_list[_last_pressed] * -1)
 	var tower = _get_new_tower_from_database(tower_name)
-	if not tower: return
+	
+	if not tower: 
+		return
+	
 	add_tower(tower, _cursor.get_cell_position(), _cursor.get_center_offset())
 
 

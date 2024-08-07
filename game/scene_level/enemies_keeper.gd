@@ -10,8 +10,14 @@ signal path_cleared
 @export var _gen_grow_count_from_wave := 0.1
 @export var _gen_max_count_in_wave := 10
 
+var currency: CurrencySystem: set = set_currency
+
 var _clearing_path := []
 var _logger := GodotLogger.with("EnemiesKeeper")
+
+
+func _ready():
+	_connection_paths()
 
 
 func generate_wave(wave: int = 0):
@@ -19,8 +25,11 @@ func generate_wave(wave: int = 0):
 	get_child(0).spawn_any(enemy_count)
 
 
-func _ready():
-	_connection_paths()
+func set_currency(new_currency: CurrencySystem):
+	currency = new_currency
+	if not is_inside_tree(): return
+	for child in get_children():
+		child.currency = currency
 
 
 func _connection_paths():
@@ -31,16 +40,18 @@ func _connection_paths():
 
 func _on_enemies_is_over(path: EnemiesPath):
 	if _clearing_path.has(path):
-		_logger.warn("path %s duble clearing" % path)
+		_logger.warn("Path %s duble clearing" % path)
 		return
 	
 	_clearing_path.append(path)
 	if _clearing_path.size() == get_child_count():
 		_clearing_path.clear()
-		_logger.info("all paths cleared!")
+		_logger.info("All paths cleared!")
 		GodotLogger.info("")
 		path_cleared.emit()
+		currency.change("money", 250)
 		return
-	_logger.debug("path [color=yellow]%s[/color] clear!" % path)
+	
+	_logger.debug("Path [color=yellow]%s[/color] clear!" % path)
 
 

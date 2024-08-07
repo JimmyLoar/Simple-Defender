@@ -67,6 +67,35 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 mouse_filter = 2
 
+[node name="UpperBar" type="MarginContainer" parent="UI"]
+custom_minimum_size = Vector2(0, 96)
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UI/UpperBar"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="UI/UpperBar/HBoxContainer"]
+layout_mode = 2
+text = "corrency"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/UpperBar/HBoxContainer"]
+layout_mode = 2
+text = "corrency"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/UpperBar/HBoxContainer"]
+layout_mode = 2
+text = "corrency"
+horizontal_alignment = 2
+vertical_alignment = 1
+
 [connection signal="sell_pressed" from="UI/MarginContainer/HBoxContainer/TowerInformation" to="UI" method="_on_tower_information_sell_pressed"]
 [connection signal="upgrade_pressed" from="UI/MarginContainer/HBoxContainer/TowerInformation" to="UI" method="_on_tower_information_upgrade_pressed"]
 [connection signal="visibility_changed" from="UI/MarginContainer/HBoxContainer/TowerInformation" to="UI" method="_on_tower_information_visibility_changed"]

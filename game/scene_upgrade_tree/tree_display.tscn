@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://resources/upgrade_tree/sub_tree.gd" id="2_js42f"]
 [ext_resource type="PackedScene" uid="uid://jf1kxtqrntej" path="res://game/scene_upgrade_tree/tree_node.tscn" id="2_rtr7k"]
 
-[node name="TreeDisplay" type="Node2D"]
+[node name="TreeDisplay" type="Node2D" groups=["skill_tree"]]
 script = ExtResource("1_fdv7o")
 
 [node name="NodeConnections" type="Node2D" parent="."]

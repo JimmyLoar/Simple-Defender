@@ -14,7 +14,12 @@ func _ready():
 	_place_cheker.add_busy_array(get_tile_map().get_used_cells(2))
 	get_tower_builder().place_cheker = _place_cheker
 	get_tower_builder().init_cursor()
-	_logger.info("ready!")
+	_logger.info("Ready!")
+
+
+func set_currency(new_currency: CurrencySystem):
+	get_tower_builder().currency = new_currency
+	get_enemy_keeper().currency = new_currency
 
 
 func get_tile_map() -> TileMap: return %TileMap

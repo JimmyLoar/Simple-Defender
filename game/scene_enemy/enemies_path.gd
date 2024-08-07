@@ -6,6 +6,7 @@ signal enemies_is_ever
 @export var test_enemy_scene : PackedScene
 
 var cooldown := 0.5
+var currency: CurrencySystem
 
 var _pool := []
 var _timer := Timer.new()
@@ -61,13 +62,15 @@ func _on_dissapear_enemy(enemy: Enemy):
 	_pool.append(enemy)
 	if get_child_count() - 1 == 0:
 		enemies_is_ever.emit()
+		
+	if currency:
+		currency.change("scrap", 5)
 
 
 class EnemyPathFollower:
 	extends PathFollow2D
 	
 	var _enemy : Enemy
-	
 	
 	func _init(enemy: Enemy):
 		rotates = false

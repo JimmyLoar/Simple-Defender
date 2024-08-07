@@ -23,3 +23,9 @@ func set_tower(tower: TowerBase):
 		tree.visible = key == tower.tree_name
 		if tree.visible:
 			tree.set_tower(tower)
+
+
+func set_currency(currency: CurrencySystem):
+	for tree in viewport.get_children():
+		if not tree is TreeDisplay: continue
+		tree.currency = currency
