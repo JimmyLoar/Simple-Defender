@@ -1,5 +1,5 @@
-extends DataLib
 class_name DataLibPackedScene
+extends DataLib
 
 @export var _data_unpacked := Dictionary()
 
