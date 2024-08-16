@@ -41,5 +41,3 @@ func remove_weapon():
 	radar.set_vition_range(get_stats().vision_range)
 	remove_child(weapon)
 	_logger.debug("removed weapon %s" % [weapon.name])
-
-

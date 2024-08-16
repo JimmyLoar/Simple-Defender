@@ -248,4 +248,3 @@ func _get_global_logger():
 func _load_file():
 	var filename: String = _get_log_path()
 	_file = FileAccess.open(filename, FileAccess.WRITE)
-

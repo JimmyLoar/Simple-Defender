@@ -12,5 +12,3 @@ func set_title(_name: String):
 
 func set_icon(icon: Texture):
 	texture_rect.texture = icon
-
-

@@ -53,5 +53,3 @@ func _on_enemies_is_over(path: EnemiesPath):
 		return
 	
 	_logger.debug("Path [color=yellow]%s[/color] clear!" % path)
-
-

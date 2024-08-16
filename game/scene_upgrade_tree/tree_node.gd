@@ -147,5 +147,3 @@ func _get_property_list() -> Array[Dictionary]:
 
 func _pressed() -> void:
 	want_unlock.emit(self)
-
-

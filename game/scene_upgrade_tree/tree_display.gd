@@ -79,4 +79,3 @@ func set_tower(tower: TowerBase):
 	
 	selected_tower = tower
 	set_unlock_skills(tower.unlocked_skills)
-

@@ -43,4 +43,3 @@ func get_hit_points() -> HitpointsCompanent:
 
 func is_dead():
 	return _hit_points.is_dead()
-

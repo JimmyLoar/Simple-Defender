@@ -34,9 +34,3 @@ func get_for_key(key: String) -> Variant:
 
 func get_all_data() -> Dictionary:
 	return _data
-
-
-
-
-
-

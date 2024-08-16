@@ -7,6 +7,7 @@
 position = Vector2(280, 400)
 
 [node name="Root" parent="NodesBox/T1" index="0" node_paths=PackedStringArray("_ui_top")]
+modulate = Color(1, 0.627451, 0.478431, 1)
 position = Vector2(3, 1)
 _ui_top = NodePath("../Firerate")
 base_skill = &"root_gun"

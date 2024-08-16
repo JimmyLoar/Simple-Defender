@@ -109,5 +109,3 @@ func init_skills():
 		
 		
 		
-
-

@@ -62,6 +62,3 @@ func _add_new_property(key: StringName, value: Variant) -> bool:
 	data[&"all"]= value
 	_data[key] = data
 	return true
-
-
-

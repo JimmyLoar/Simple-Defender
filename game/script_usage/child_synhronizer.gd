@@ -43,5 +43,3 @@ func _remove_childs(count: int = 1):
 		var child = parent.get_child(0)
 		parent.remove_child(child)
 		_pool.append(child)
-
-

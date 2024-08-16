@@ -127,6 +127,3 @@ func is_building_mode() -> bool:
 
 func _get_new_tower_from_database(tower_name: String) -> TowerBase:
 	return Database.get_towers_lib().get_node(tower_name)
-
-
-

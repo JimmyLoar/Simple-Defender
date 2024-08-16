@@ -86,4 +86,3 @@ func get_stats() -> Dictionary:
 
 func _get_stats() -> Dictionary:
 	return _skill_stats
-
